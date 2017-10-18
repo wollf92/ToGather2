@@ -46,17 +46,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
+    private User currentUser;
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -211,7 +204,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
@@ -324,7 +316,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return u.getPassword().equals(mPassword);
                 }
             }
-            // TODO: register the new account here.
             db.addUser(new User(mEmail, mPassword));
             return true;
         }
@@ -334,7 +325,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            if (success){
+                DataBase db = new DataBase();
+                User u = null;
+                for(User us : db.getUsers()) {
+                    if (us.getEmail().equals(mEmail)) {
+                        u = us;
+                        break;
+                    }
+                }
+                if(u != null) {
+                    ((TextView) findViewById(R.id.username)).setText(u.getName());
+                    ((TextView) findViewById(R.id.textView8)).setText(u.getPassword());
+                }
+
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 finish();
