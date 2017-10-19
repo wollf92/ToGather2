@@ -89,4 +89,6 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_user_settings">UserSettingsActivity</string>
+    <string name="title_activity_tabbed_activity">Tabbed_activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

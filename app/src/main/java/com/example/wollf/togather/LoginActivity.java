@@ -3,7 +3,9 @@ package com.example.wollf.togather;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -55,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,6 +293,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        SharedPreferences.Editor editor = getSharedPreferences("user_data", MODE_PRIVATE).edit();
+
         private final String mEmail;
         private final String mPassword;
 
@@ -316,15 +322,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return u.getPassword().equals(mPassword);
                 }
             }
-            db.addUser(new User(mEmail, mPassword));
+            db.addUser(new User("Jozef", mEmail, mPassword));
             return true;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
-
             if (success){
                 DataBase db = new DataBase();
                 User u = null;
@@ -334,12 +338,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         break;
                     }
                 }
-                if(u != null) {
-                    ((TextView) findViewById(R.id.username)).setText(u.getName());
-                    ((TextView) findViewById(R.id.textView8)).setText(u.getPassword());
-                }
 
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                editor.putString("name", u.getName());
+                editor.putString("email", u.getEmail());
+                editor.apply();
+
+                Intent i = new Intent(getApplicationContext(), Tabbed_activity.class);
                 startActivity(i);
                 finish();
             } else {
