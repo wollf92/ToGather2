@@ -1,8 +1,9 @@
 package com.example.wollf.togather;
 
-import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,9 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
-public class Tabbed_activity extends AppCompatActivity {
+public class TabbedActivity extends AppCompatActivity implements EventTab.OnFragmentInteractionListener,
+    ProfileTab.OnFragmentInteractionListener, GroupTab.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,6 +50,9 @@ public class Tabbed_activity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,11 @@ public class Tabbed_activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -113,19 +121,8 @@ public class Tabbed_activity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tabbed_activity, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_default, container, false);
 
-            SharedPreferences prefs = getContext().getSharedPreferences("user_data", MODE_PRIVATE);
-            String name = prefs.getString("name", null);
-            String email = prefs.getString("email", null);
-
-            TextView t = (TextView)rootView.findViewById(R.id.textView);
-            if (t != null && name != null && email != null) {
-                t.setText("Name: " + name + " Email: " + email);
-            }
-
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -144,6 +141,13 @@ public class Tabbed_activity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            if (position == 0) {
+                return EventTab.newInstance(null, null);
+            } else if (position == 1){
+                return GroupTab.newInstance(null, null);
+            } else if (position == 2){
+                return ProfileTab.newInstance(null, null);
+            }
             return PlaceholderFragment.newInstance(position + 1);
         }
 
@@ -157,11 +161,11 @@ public class Tabbed_activity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Events";
                 case 1:
-                    return "SECTION 2";
+                    return "Groups";
                 case 2:
-                    return "SECTION 3";
+                    return "Profile";
             }
             return null;
         }

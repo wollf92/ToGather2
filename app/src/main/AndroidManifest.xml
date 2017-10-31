@@ -37,7 +37,7 @@
         <activity android:name=".Events" />
         <activity android:name=".Groups" />
         <activity
-            android:name=".Tabbed_activity"
+            android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed_activity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

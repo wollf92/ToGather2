@@ -343,7 +343,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 editor.putString("email", u.getEmail());
                 editor.apply();
 
-                Intent i = new Intent(getApplicationContext(), Tabbed_activity.class);
+                Intent i = new Intent(getApplicationContext(), TabbedActivity.class);
                 startActivity(i);
                 finish();
             } else {
