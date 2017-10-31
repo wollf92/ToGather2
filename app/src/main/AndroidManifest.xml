@@ -34,8 +34,6 @@
             android:name=".UserSettingsActivity"
             android:label="@string/title_activity_user_settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Events" />
-        <activity android:name=".Groups" />
         <activity
             android:name=".TabbedActivity"
             android:label="@string/title_activity_tabbed_activity"
