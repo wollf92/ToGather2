@@ -2,14 +2,16 @@ package com.example.wollf.togather;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by wollf on 17-10-2017.
  */
 
-public class User {
+public class User implements Serializable{
     private String name;
     private String email;
     private String password;
@@ -18,8 +20,10 @@ public class User {
     private Image profile_picture;
     private String[] allergies;
     private Calendar join_date;
+    private String uniqueID;
 
     public User(String name, String email, String password){
+        this.uniqueID = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
         this.password = password;
@@ -29,6 +33,7 @@ public class User {
         this.join_date = Calendar.getInstance();
     }
 
+    public String getUniqueID() { return uniqueID; }
     public String getIBAN() {
         return IBAN;
     }
