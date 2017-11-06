@@ -8,8 +8,26 @@ import java.util.List;
  */
 
 public class Event {
+
+    int typeOfEvent;
+    String title;
+    String description;
+    Date startDate;
+    int startTime;
+    Date endDate;
+    int endTime;
+
     Group from;
     List<User> usersFromGroup;
+
+    public Event(String title, String desc, Date startDate, Date endDate, int startTime, int endTime){
+        this.title = title;
+        this.description = desc;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     public Group getFrom() {
         return from;
@@ -71,16 +89,14 @@ public class Event {
         return endTime;
     }
 
+    public String getDescription(){
+        return description;
+    }
+
     public void setEndTime(int endTime) {
         this.endTime = endTime;
     }
 
-    int typeOfEvent;
-    String title;
-    Date startDate;
-    int startTime;
-    Date endDate;
-    int endTime;
 
     @Override
     public boolean equals(Object o) {

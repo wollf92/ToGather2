@@ -36,6 +36,8 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
      */
     private ViewPager mViewPager;
 
+    private FloatingActionButton fabEvent, fabGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +56,65 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabEvent = (FloatingActionButton) findViewById(R.id.fabEvent);
+        fabGroup = (FloatingActionButton) findViewById(R.id.fabGroup);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                System.out.println(tab.getPosition());
+                showAddButton(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        fabEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                // Takes you to add Event activity
+                Snackbar.make(view, "Add Event", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
+        fabGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Takes you to add Group activity
+                Snackbar.make(view, "Add Group", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
 
+    }
+
+    void showAddButton(int position){
+        switch (position){
+            case 0:
+                fabGroup.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+                    @Override
+                    public void onHidden(FloatingActionButton fab) {
+                        fabEvent.show();
+                    }
+                });
+                break;
+            case 1:
+                fabEvent.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+                    @Override
+                    public void onHidden(FloatingActionButton fab) {
+                        fabGroup.show();
+                    }
+                });
+                break;
+        }
     }
 
 

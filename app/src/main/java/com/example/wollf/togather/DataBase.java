@@ -14,6 +14,16 @@ import java.util.List;
  */
 public class DataBase {
 
+    private static List<Event> Events = Arrays.asList(
+            new Event("Trip to Las vegas", "This is going to be fun!", new Date(343543534),
+                    new Date(34932423), 1400, 1840
+            ),
+            new Event("Movie night", "We are watching Breaking bad...", new Date(348323245),
+                    new Date(39421520), 1640, 2400),
+            new Event("Diner", "We need to eat", new Date(348323245),
+                    new Date(39421520), 1800, 2000)
+    );
+
     private static List<User> DUMMYDATA = Arrays.asList(
         new User("John","user1@mail.com","password1"),
         new User("Karin","user2@mail.com","password2")
@@ -28,7 +38,13 @@ public class DataBase {
     public List<User> getUsers(){
         return DUMMYDATA;
     }
+    public List<Event> getEvents(){
+        return Events;
+    }
     public void addUser(User u){
         DUMMYDATA.add(u);
+    }
+    public void addEvent(Event e){
+        Events.add(e);
     }
 }
