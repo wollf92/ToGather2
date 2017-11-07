@@ -1,7 +1,8 @@
 package com.example.wollf.togather;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by wollf on 17-10-2017.
@@ -12,21 +13,24 @@ public class Event {
     int typeOfEvent;
     String title;
     String description;
-    Date startDate;
+    Calendar startDate;
     int startTime;
-    Date endDate;
+    Calendar endDate;
     int endTime;
+    String uniqueID;
+
 
     Group from;
     List<User> usersFromGroup;
 
-    public Event(String title, String desc, Date startDate, Date endDate, int startTime, int endTime){
+    public Event(String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime){
         this.title = title;
         this.description = desc;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.uniqueID = UUID.randomUUID().toString();
     }
 
     public Group getFrom() {
@@ -61,11 +65,11 @@ public class Event {
         this.title = title;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
@@ -77,17 +81,19 @@ public class Event {
         this.startTime = startTime;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
 
     public int getEndTime() {
         return endTime;
     }
+
+    public String getUniqueID() { return uniqueID; }
 
     public String getDescription(){
         return description;

@@ -1,37 +1,24 @@
-package com.example.wollf.togather;
+package layout;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
-
+import com.example.wollf.togather.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link EventTab.OnFragmentInteractionListener} interface
+ * {@link UserProfile.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EventTab#newInstance} factory method to
+ * Use the {@link UserProfile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventTab extends Fragment {
-
-    private List<Event> listOfEvents;
-
-    ListView listView;
-
+public class UserProfile extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,7 +30,7 @@ public class EventTab extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public EventTab() {
+    public UserProfile() {
         // Required empty public constructor
     }
 
@@ -53,11 +40,11 @@ public class EventTab extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EventTab.
+     * @return A new instance of fragment UserProfile.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventTab newInstance(String param1, String param2) {
-        EventTab fragment = new EventTab();
+    public static UserProfile newInstance(String param1, String param2) {
+        UserProfile fragment = new UserProfile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,24 +59,13 @@ public class EventTab extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event_tab, container, false);
-
-        listView = (ListView) rootView.findViewById(R.id.eventList);
-
-        DataBase db = new DataBase();
-        listOfEvents = db.getEvents(); // Do async task as it may take long time with real DB
-        EventAdapter adapter = new EventAdapter(getContext(), listOfEvents);
-
-        listView.setAdapter(adapter);
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
