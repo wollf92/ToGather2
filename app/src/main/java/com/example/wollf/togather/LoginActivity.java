@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    Context mContext = this;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -338,7 +336,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         break;
                     }
                 }
-
+                editor.putString("ID",u.getUniqueID());
                 editor.putString("name", u.getName());
                 editor.putString("email", u.getEmail());
                 editor.apply();

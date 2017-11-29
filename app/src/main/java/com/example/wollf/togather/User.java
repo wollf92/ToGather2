@@ -3,6 +3,7 @@ package com.example.wollf.togather;
 import android.media.Image;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -30,6 +31,17 @@ public class User implements Serializable{
         // TODO: to be initialized in contructor
         this.IBAN = "NL23RABO34";
         this.phone = "4083204";
+        this.join_date = Calendar.getInstance();
+    }
+
+    public User(String name, String email, String password,String iban, String phone){
+        this.uniqueID = UUID.randomUUID().toString();
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.allergies = new String[]{"peanuts", "milk"};
+        this.IBAN = iban;
+        this.phone = phone;
         this.join_date = Calendar.getInstance();
     }
 

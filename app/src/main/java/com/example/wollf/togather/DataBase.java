@@ -4,6 +4,8 @@ package com.example.wollf.togather;
  * Created by wollf on 17-10-2017.
  */
 
+import android.content.Context;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,8 +30,9 @@ public class DataBase {
     );
 
     private static List<User> DUMMYDATA = Arrays.asList(
-        new User("John","user1@mail.com","password1"),
-        new User("Karin","user2@mail.com","password2")
+            new User("John","user1@mail.com","password1"),
+            new User("Karin","user2@mail.com","password2"),
+            new User("Adam","user3@mail.com", "password3", "ABN129293299122", "0653255325")
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
@@ -47,7 +50,10 @@ public class DataBase {
      * Dummy data for now
      * @return
      */
-    public List<User> getUsers(){
+    public static User GetUser(String id){
+        return DUMMYDATAMAP.get(id);
+    }
+    public static List<User> getUsers(){
         return DUMMYDATA;
     }
     public List<Event> getEvents(){
@@ -59,9 +65,7 @@ public class DataBase {
     public void addEvent(Event e) {
         Events.add(e);
     }
-    public User GetUser(String id){
-        return DUMMYDATAMAP.get(id);
-    }
+
 
     static Calendar getDate(int year, int month, int day){
         Calendar cal = Calendar.getInstance();
