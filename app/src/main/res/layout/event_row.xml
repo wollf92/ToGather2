@@ -59,7 +59,17 @@
         android:layout_height="1dip"
         android:layout_marginTop="10dip"
         android:layout_below="@+id/date"
-        android:background="#000000" />
+        android:background="#000000"
+        android:id="@+id/view" />
+
+    <TextView
+        android:id="@+id/groupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/view"
+        android:text="TextView" />
 
 </RelativeLayout>
 

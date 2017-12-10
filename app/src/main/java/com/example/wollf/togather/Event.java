@@ -17,13 +17,13 @@ public class Event {
     int startTime;
     Calendar endDate;
     int endTime;
+    Group group;
     String uniqueID;
-
 
     Group from;
     List<User> usersFromGroup;
 
-    public Event(String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime){
+    public Event(String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime, Group group){
         this.title = title;
         this.description = desc;
         this.startDate = startDate;
@@ -31,6 +31,7 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.uniqueID = UUID.randomUUID().toString();
+        this.group = group;
     }
 
     public Group getFrom() {

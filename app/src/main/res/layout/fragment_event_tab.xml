@@ -24,9 +24,10 @@
         <ListView
             android:id="@+id/eventList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:divider="@drawable/list_divider"
+            android:paddingBottom="40dp"
             android:dividerHeight="10dp" />
 
     </LinearLayout>

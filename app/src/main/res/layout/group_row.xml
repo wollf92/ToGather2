@@ -30,36 +30,20 @@
         android:id="@+id/desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/title"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/textView"
         android:maxWidth="220dp"
         android:text="Desc" />
 
-    <ImageButton
-        android:id="@+id/more_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:background="#fff"
-        android:onClick="showPopup"
-        android:src="@drawable/ic_overflow" />
-
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/title"
-        android:gravity="bottom|end"
-        android:text="21 dec - 28 dec" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_marginTop="10dip"
-        android:layout_below="@+id/date"
-        android:background="#000000" />
+        android:text="Members:" />
 
 </RelativeLayout>
 

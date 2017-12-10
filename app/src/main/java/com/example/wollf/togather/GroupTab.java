@@ -4,9 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.List;
 
 
 /**
@@ -18,6 +22,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class GroupTab extends Fragment {
+
+    private List<Group> listOfGroups;
+    ListView listView;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +73,17 @@ public class GroupTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group_tab, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_group_tab, container, false);
+
+        listView = (ListView) rootView.findViewById(R.id.groupList);
+
+        DataBase db = new DataBase();
+        listOfGroups= db.getGroups(); // Do async task as it may take long time with real DB
+        GroupAdapter adapter = new GroupAdapter(getContext(), listOfGroups);
+
+        listView.setAdapter(adapter);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

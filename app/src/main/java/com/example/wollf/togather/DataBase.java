@@ -6,6 +6,7 @@ package com.example.wollf.togather;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,20 +20,40 @@ import java.util.Map;
  */
 public class DataBase {
 
-    private static List<Event> Events = Arrays.asList(
-            new Event("Trip to Las vegas", "This is going to be fun!", getDate(2015, 11, 23),
-                    getDate(2016,2,5), 1400, 1840
+    private static ArrayList<Group> Groups = new ArrayList<Group>(Arrays.asList(
+            new Group(
+                    "Best friends",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Adam","user3@mail.com", "password3",
+                                    "ABN129293299122", "0653255325")
+                    )
             ),
-            new Event("Movie night", "We are watching Breaking bad...", getDate(2013, 6, 11),
-                    getDate(2017, 5, 2), 1640, 2400),
+            new Group(
+                    "Classmates",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Karin","user2@mail.com","password2")
+                    )
+            )
+    ));
+
+    private static ArrayList<Event> Events = new ArrayList<Event>(Arrays.asList(
+            new Event("Trip to Las vegas", "This is going to be fun!",
+                    getDate(2015, 11, 23),
+                    getDate(2016,2,5), 1400, 1840, Groups.get(1)),
+            new Event("Movie night", "We are watching Breaking bad...",
+                    getDate(2013, 6, 11),
+                    getDate(2017, 5, 2), 1640, 2400, Groups.get(0)),
             new Event("Diner", "We need to eat", getDate(2012, 1, 6),
-                    getDate(2015, 11, 23), 1800, 2000)
-    );
+                    getDate(2015, 11, 23), 1800, 2000, Groups.get(0))
+    ));
 
     private static List<User> DUMMYDATA = Arrays.asList(
             new User("John","user1@mail.com","password1"),
             new User("Karin","user2@mail.com","password2"),
-            new User("Adam","user3@mail.com", "password3", "ABN129293299122", "0653255325")
+            new User("Adam","user3@mail.com", "password3",
+                    "ABN129293299122", "0653255325")
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
@@ -59,11 +80,17 @@ public class DataBase {
     public List<Event> getEvents(){
         return Events;
     }
+    public List<Group> getGroups(){
+        return Groups;
+    }
     public void addUser(User u){
         DUMMYDATA.add(u);
     }
     public void addEvent(Event e) {
         Events.add(e);
+    }
+    public void addGroup(Group g) {
+        Groups.add(g);
     }
 
 

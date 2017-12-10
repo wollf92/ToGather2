@@ -1,5 +1,6 @@
 package com.example.wollf.togather;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,22 +48,32 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        //Bundle extras = getIntent().getExtras();
+        int tab = getIntent().getIntExtra("tab", 0);
+        mViewPager.setCurrentItem(tab);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+
         fabEvent = (FloatingActionButton) findViewById(R.id.fabEvent);
         fabGroup = (FloatingActionButton) findViewById(R.id.fabGroup);
+        showAddButton(tab);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println(tab.getPosition());
+                if(tab.getPosition() == 2) { // profile page
+                    fabEvent.hide();
+                    fabGroup.hide();
+                }
                 showAddButton(tab.getPosition());
             }
 
@@ -81,16 +92,16 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
             @Override
             public void onClick(View view) {
                 // Takes you to add Event activity
-                Snackbar.make(view, "Add Event", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                Intent addEvent = new Intent(getApplicationContext(), AddEvent.class);
+                startActivity(addEvent);
             }
         });
         fabGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Takes you to add Group activity
-                Snackbar.make(view, "Add Group", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                Intent addGroup = new Intent(getApplicationContext(), AddGroup.class);
+                startActivity(addGroup);
             }
         });
 
@@ -99,20 +110,24 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
     void showAddButton(int position){
         switch (position){
             case 0:
-                fabGroup.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+                /*fabGroup.hide(new FloatingActionButton.OnVisibilityChangedListener() {
                     @Override
                     public void onHidden(FloatingActionButton fab) {
                         fabEvent.show();
                     }
-                });
+                });*/
+                fabGroup.hide();
+                fabEvent.show();
                 break;
             case 1:
-                fabEvent.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+                /*fabEvent.hide(new FloatingActionButton.OnVisibilityChangedListener() {
                     @Override
                     public void onHidden(FloatingActionButton fab) {
                         fabGroup.show();
                     }
-                });
+                });*/
+                fabEvent.hide();
+                fabGroup.show();
                 break;
         }
     }

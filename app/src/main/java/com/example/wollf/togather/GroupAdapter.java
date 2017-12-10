@@ -27,13 +27,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class EventAdapter extends ArrayAdapter<Event> {
+public class GroupAdapter extends ArrayAdapter<Group> {
     private final Context context;
-    private final List<Event> itemsArrayList;
+    private final List<Group> itemsArrayList;
 
-    public EventAdapter(Context context, List<Event> itemsArrayList) {
+    public GroupAdapter(Context context, List<Group> itemsArrayList) {
 
-        super(context, R.layout.event_row, itemsArrayList);
+        super(context, R.layout.group_row, itemsArrayList);
 
         this.context = context;
         this.itemsArrayList = itemsArrayList;
@@ -45,34 +45,25 @@ public class EventAdapter extends ArrayAdapter<Event> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.event_row, parent, false);
+        View rowView = inflater.inflate(R.layout.group_row, parent, false);
         TextView title = (TextView) rowView.findViewById(R.id.title);
         TextView desc = (TextView) rowView.findViewById(R.id.desc);
         TextView date = (TextView) rowView.findViewById(R.id.date);
-        TextView groupName = (TextView) rowView.findViewById(R.id.groupName);
 
         ImageButton more = (ImageButton) rowView.findViewById(R.id.more_event);
 
-        title.setText(itemsArrayList.get(position).getTitle());
-        desc.setText(itemsArrayList.get(position).getDescription());
+        String users = "";
+        for (User a : itemsArrayList.get(position).getUsers()) {
+            users += a.getName() + " ";
+        }
 
-        String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
-        String endDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getEndDate());
-
-        date.setText(startDate + " - " + endDate);
-
-        groupName.setText(itemsArrayList.get(position).group.groupName);
-
-        more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(view, position);
-            }
-        });
+        title.setText(itemsArrayList.get(position).getGroupName());
+        desc.setText(users);
 
         return rowView;
     }
 
+    /*
     public void showPopup(View v, final int pos) {
         PopupMenu popup = new PopupMenu(context, v);
         MenuInflater inflater = popup.getMenuInflater();
@@ -90,4 +81,5 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         popup.show();
     }
+    */
 }
