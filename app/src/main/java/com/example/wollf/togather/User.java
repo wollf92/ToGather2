@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -22,6 +24,7 @@ public class User implements Serializable{
     private String[] allergies;
     private Calendar join_date;
     private String uniqueID;
+    private Map<String, Group> groups;
 
     public User(String name, String email, String password){
         this.uniqueID = UUID.randomUUID().toString();
@@ -32,6 +35,7 @@ public class User implements Serializable{
         this.IBAN = "NL23RABO34";
         this.phone = "4083204";
         this.join_date = Calendar.getInstance();
+        groups = new HashMap<>();
     }
 
     public User(String name, String email, String password,String iban, String phone){
@@ -103,5 +107,8 @@ public class User implements Serializable{
     }
     public void setPassword(String password){
         this.password = password;
+    }
+    public Group getGroupById(String groupID){
+        return groups.get(groupID);
     }
 }

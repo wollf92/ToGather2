@@ -99,4 +99,12 @@ public class DataBase {
         cal.set(year, month, day);
         return cal;
     }
+
+    public Group getGroup(String groupID){
+        for(Group g : Groups){
+            if(g.uniqueID.equals(groupID))
+                return g;
+        }
+        return null;
+    }
 }

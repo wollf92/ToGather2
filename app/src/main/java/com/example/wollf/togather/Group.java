@@ -1,6 +1,7 @@
 package com.example.wollf.togather;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -12,6 +13,7 @@ public class Group {
     String uniqueID;
     String groupName;
     List<User> users;
+    Map<String, Double> balances;
 
     Group(String name, List<User> users){
         this.groupName = name;
@@ -56,5 +58,9 @@ public class Group {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public Double getBalanceFor(String userID){
+        return balances.get(userID);
     }
 }
