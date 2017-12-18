@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/profile_background"
+    android:backgroundTint="#e3e3e3"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
@@ -53,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
-            android:background="@color/lightmask"
+            android:background="@color/darkgrey"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -92,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".1"
-            android:background="@color/lightmask"
+            android:background="@color/darkgrey"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -141,7 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/darkermask"
+                    android:background="@color/lightmask"
                     android:text="Hi my name is Mike and I like kittens" />
 
             </TableRow>
@@ -173,7 +174,7 @@
                         android:scaleType="fitStart"
                         android:scaleX="0.8"
                         android:scaleY="0.8"
-                        app:srcCompat="@drawable/cutlery" />
+                        app:srcCompat="@drawable/cutlery"/>
 
                     <Space
                         android:layout_width="@dimen/activity_horizontal_margin"

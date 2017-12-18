@@ -12,7 +12,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.wollf.togather.EventTab">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout
+    android:background="@drawable/trip"
+    android:backgroundTint="#e3e3e3"
+    -->
 
 
     <LinearLayout

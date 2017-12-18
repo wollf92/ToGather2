@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#29C4A6  </color>
+    <color name="colorPrimaryDark">#138A72</color>
+    <color name="colorAccent">#1E1E24</color>
+    <color name="lightmask">#8fffffff</color>
+    <color name="darkermask">#d5ffffff</color>
+    <color name="rowback">#FFF</color>
+    <color name="rowbacktint">#FFF</color>
+    <color name="darkgrey">#8D99AE</color>
+</resources>
+
+<!-- Original colors
+
+    <?xml version="1.0" encoding="utf-8"?>
+<resources>
     <color name="colorPrimary">#873f51b5  </color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#ff4081     </color>
     <color name="lightmask">#8fffffff</color>
     <color name="darkermask">#d5ffffff</color>
 </resources>
+
+Proposed Colors:
+#29C4A6 Logo light
+#138A72 Logo dark
+
+#1E1E24 Blackish
+
+Still in use
+
+lightmask  #8fffffff
+darkermask #d5ffffff
+
+Not in use
+
+#E4572E Orange
+#D2AB99 Beige
+
+-->
