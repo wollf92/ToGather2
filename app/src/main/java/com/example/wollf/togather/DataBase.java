@@ -35,6 +35,34 @@ public class DataBase {
                             new User("John","user1@mail.com","password1"),
                             new User("Karin","user2@mail.com","password2")
                     )
+            ),
+            new Group(
+                    "Classmates2",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Karin","user2@mail.com","password2")
+                    )
+            ),
+            new Group(
+                    "Classmates3",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Karin","user2@mail.com","password2")
+                    )
+            ),
+            new Group(
+                    "Classmates4",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Karin","user2@mail.com","password2")
+                    )
+            ),
+            new Group(
+                    "Classmates5",
+                    Arrays.asList(
+                            new User("John","user1@mail.com","password1"),
+                            new User("Karin","user2@mail.com","password2")
+                    )
             )
     ));
 
@@ -46,14 +74,18 @@ public class DataBase {
                     getDate(2013, 6, 11),
                     getDate(2017, 5, 2), 1640, 2400, Groups.get(0)),
             new Event("Diner", "We need to eat", getDate(2012, 1, 6),
-                    getDate(2015, 11, 23), 1800, 2000, Groups.get(0))
+                    getDate(2015, 11, 23), 1800, 2000, Groups.get(0)),
+            new Event( "Diner2", "We need to eat", getDate(2012,1,6),
+                    getDate(2015,11,23), 1800, 2000, Groups.get(0)),
+            new Event( "Diner3", "We need to eat", getDate(2012,1,6),
+                    getDate(2015,11,23), 1800, 2000, Groups.get(0))
+
     ));
 
     private static List<User> DUMMYDATA = Arrays.asList(
-            new User("John","user1@mail.com","password1"),
-            new User("Karin","user2@mail.com","password2"),
-            new User("Adam","user3@mail.com", "password3",
-                    "ABN129293299122", "0653255325")
+            new User("John D","user1@mail.com","password1", "SNSB1234567890", " 0612340128"),
+            new User("Karin S","user2@mail.com","password2", "INGB1234567809", "0625412587"),
+            new User("Adam A","user3@mail.com", "password3","ABN129293299122", "0653255325")
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())
             //new User("Kate","user3@mail.com", "password3","NL20RABO06","87104545",Calendar.getInstance())

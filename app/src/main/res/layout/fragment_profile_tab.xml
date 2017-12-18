@@ -109,7 +109,8 @@
                 android:gravity="center"
                 android:inputType="textPersonName"
                 android:autoSizeTextType="uniform"
-                android:text="Mike K" />
+                android:text="John Doe"
+                />
 
             <Space
                 android:layout_width="wrap_content"
@@ -162,7 +163,7 @@
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageAllergy"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="top|left"
@@ -233,7 +234,7 @@
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageBankaccount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|left"
@@ -271,10 +272,10 @@
                             android:layout_height="0dp"
                             android:layout_weight="0.5"
                             android:gravity="top"
-                            android:text="TextView" />
+                            android:text="Banknr not set" />
 
                         <View
-                            android:id="@+id/textureView2"
+                            android:id="@+id/textureView3"
                             android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@android:color/background_dark" />
@@ -305,7 +306,7 @@
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|left"
@@ -341,13 +342,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="0.5"
-                            android:text="TextView" />
+                            android:text="Email address not set" />
 
                         <View
                             android:id="@+id/textureView2"
                             android:layout_width="match_parent"
                             android:layout_height="1px"
-                            android:background="@android:color/background_dark" />
+                            android:background="@android:color/background_dark"
+                            tools:ignore="DuplicateIds" />
 
                     </LinearLayout>
 
@@ -376,7 +378,7 @@
                     android:weightSum="1">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/imageBirthday"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="top|left"
@@ -413,10 +415,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="0.5"
-                            android:text="TextView" />
+                            android:text="Birthday not set" />
 
                         <View
-                            android:id="@+id/textureView2"
+                            android:id="@+id/textureView4"
                             android:layout_width="match_parent"
                             android:layout_height="1px"
                             android:background="@android:color/background_dark" />

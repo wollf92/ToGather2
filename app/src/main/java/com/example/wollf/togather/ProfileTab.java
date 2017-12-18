@@ -73,6 +73,8 @@ public class ProfileTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile_tab, container, false);
         String id = editor.getString("ID", null);
         User u = DataBase.GetUser(id);
+        TextView n = (TextView)rootView.findViewById(R.id.profileName);
+        n.setText(u.getName());
         TextView t = (TextView)rootView.findViewById(R.id.bankAccountText);
         t.setText(u.getIBAN());
         TextView e = (TextView)rootView.findViewById(R.id.emailAddressText);
