@@ -32,8 +32,8 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.user_balance_row, parent, false);
-        TextView user = (TextView) rowView.findViewById(R.id.balanceUserName);
-        TextView balance = (TextView) rowView.findViewById(R.id.balanceUserBalance);
+        TextView user = rowView.findViewById(R.id.balanceUserName);
+        TextView balance = rowView.findViewById(R.id.balanceUserBalance);
 
         String currentGroupID = "test"; //to be replaced by setting group balance;
         user.setText(itemsArrayList.get(position).getName());

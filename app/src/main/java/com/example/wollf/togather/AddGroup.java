@@ -21,15 +21,15 @@ public class AddGroup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.users_list);
-        Button addBtn = (Button) findViewById(R.id.addGroupBtn);
-        final EditText groupNameText = (EditText) findViewById(R.id.group_name);
+        LinearLayout ll = findViewById(R.id.users_list);
+        Button addBtn = findViewById(R.id.addGroupBtn);
+        final EditText groupNameText = findViewById(R.id.group_name);
 
         List<User> users = db.getUsers();
 

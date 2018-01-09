@@ -26,9 +26,6 @@ public class ProfileTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private SharedPreferences editor;
     private OnFragmentInteractionListener mListener;
 
@@ -58,8 +55,8 @@ public class ProfileTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
         editor = this.getActivity().getSharedPreferences("user_data", MODE_PRIVATE);
     }
@@ -73,11 +70,11 @@ public class ProfileTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile_tab, container, false);
         String id = editor.getString("ID", null);
         User u = DataBase.GetUser(id);
-        TextView n = (TextView)rootView.findViewById(R.id.profileName);
+        TextView n = rootView.findViewById(R.id.profileName);
         n.setText(u.getName());
-        TextView t = (TextView)rootView.findViewById(R.id.bankAccountText);
+        TextView t = rootView.findViewById(R.id.bankAccountText);
         t.setText(u.getIBAN());
-        TextView e = (TextView)rootView.findViewById(R.id.emailAddressText);
+        TextView e = rootView.findViewById(R.id.emailAddressText);
         e.setText(u.getEmail());
         //TextView d = (TextView)rootView.findViewById(R.id.
         return rootView;

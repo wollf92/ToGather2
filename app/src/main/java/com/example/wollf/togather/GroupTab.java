@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class GroupTab extends Fragment {
 
-    private List<Group> listOfGroups;
     ListView listView;
 
 
@@ -31,10 +30,6 @@ public class GroupTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +59,8 @@ public class GroupTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -75,10 +70,10 @@ public class GroupTab extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group_tab, container, false);
 
-        listView = (ListView) rootView.findViewById(R.id.groupList);
+        listView = rootView.findViewById(R.id.groupList);
 
         DataBase db = new DataBase();
-        listOfGroups= db.getGroups(); // Do async task as it may take long time with real DB
+        List<Group> listOfGroups = db.getGroups();
         GroupAdapter adapter = new GroupAdapter(getContext(), listOfGroups);
 
         listView.setAdapter(adapter);

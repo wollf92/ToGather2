@@ -28,18 +28,12 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class EventTab extends Fragment {
 
-    private List<Event> listOfEvents;
-
     ListView listView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,8 +63,8 @@ public class EventTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -81,10 +75,10 @@ public class EventTab extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_event_tab, container, false);
 
-        listView = (ListView) rootView.findViewById(R.id.eventList);
+        listView = rootView.findViewById(R.id.eventList);
 
         DataBase db = new DataBase();
-        listOfEvents = db.getEvents(); // Do async task as it may take long time with real DB
+        List<Event> listOfEvents = db.getEvents();
         EventAdapter adapter = new EventAdapter(getContext(), listOfEvents);
 
         listView.setAdapter(adapter);

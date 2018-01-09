@@ -46,11 +46,11 @@ public class GroupAdapter extends ArrayAdapter<Group> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.group_row, parent, false);
-        TextView title = (TextView) rowView.findViewById(R.id.title);
-        TextView desc = (TextView) rowView.findViewById(R.id.desc);
-        TextView date = (TextView) rowView.findViewById(R.id.date);
+        TextView title = rowView.findViewById(R.id.title);
+        TextView desc = rowView.findViewById(R.id.desc);
+        TextView date = rowView.findViewById(R.id.date);
 
-        ImageButton more = (ImageButton) rowView.findViewById(R.id.more_event);
+        ImageButton more = rowView.findViewById(R.id.more_event);
 
         String users = "";
         for (User a : itemsArrayList.get(position).getUsers()) {

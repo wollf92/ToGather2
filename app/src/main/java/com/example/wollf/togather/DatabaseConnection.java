@@ -54,10 +54,10 @@ public class DatabaseConnection extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
-        check = (CheckBox) findViewById(R.id.check);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        check = findViewById(R.id.check);
 
         String Str_user = app_preferences.getString("username","0" );
         String Str_pass = app_preferences.getString("password", "0");
@@ -80,7 +80,7 @@ public class DatabaseConnection extends Activity
                     SharedPreferences.Editor editor = app_preferences.edit();
                     editor.putString("username", name);
                     editor.putString("password", pass);
-                    editor.commit();
+                    editor.apply();
                 }
                 if(name.equals("") || pass.equals(""))
                 {
@@ -106,7 +106,7 @@ public class DatabaseConnection extends Activity
                         data = new byte[256];
 
                         buffer = new StringBuffer();
-                        int len = 0;
+                        int len;
                         while (-1 != (len = inputStream.read(data)) )
                         {
                             buffer.append(new String(data, 0, len));
@@ -141,7 +141,7 @@ public class DatabaseConnection extends Activity
 
 
                     editor.putString("checked", "yes");
-                    editor.commit();
+                    editor.apply();
                 }
                 else
                 {

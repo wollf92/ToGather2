@@ -10,18 +10,7 @@
         android:layout_height="fill_parent"
         android:background="#ff2a1703"
         android:fadingEdge="horizontal">
-        <TextView
-            android:id="@+id/text"
-            android:text="manage your projects..."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="serif"
-            android:textStyle="italic"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="50dip"
-            android:textSize="20sp" >
-        </TextView>
+
         <EditText
             android:id="@+id/username"
             android:layout_width="213dip"
