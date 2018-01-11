@@ -28,6 +28,7 @@ public class GroupBalanceFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_group_balance, container, false);
 
         ListView listView = rootView.findViewById(R.id.groupBalanceList);
+        ListView listView2 = rootView.findViewById(R.id.calculatedBalanceList);
         Button tikkieButton = rootView.findViewById(R.id.calculate_tikkies_button);
 
 //        tikkieButton.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +48,11 @@ public class GroupBalanceFragment extends Fragment {
         DataBase db = new DataBase();
         List<User> listOfUsers = db.getGroup(groupID).getUsers(); // Do async task as it may take long time with real DB
         GroupBalanceAdapter adapter = new GroupBalanceAdapter(getContext(), listOfUsers);
+        BalanceCalculator bc = db.getCalculatorForGroup(db.getGroup(groupID));
+        CalculatedBalanceAdapter adapter2 = new CalculatedBalanceAdapter(getContext(), bc.calculateTransaction());
 
         listView.setAdapter(adapter);
-
+        listView2.setAdapter(adapter2);
         return rootView;
     }
 }

@@ -169,10 +169,12 @@ public class DataBase {
 
     public BalanceCalculator getCalculatorForGroup(Group g){
         BalanceCalculator bc = new BalanceCalculator();
-        Map<User, List<Double>> payments = GroupPayments.get(g);
-        for(Map.Entry<User, List<Double>> e : payments.entrySet()){
-            for(Double d : e.getValue()){
-                bc.addBalance(e.getKey(), d);
+        if(GroupPayments.containsKey(g)) {
+            Map<User, List<Double>> payments = GroupPayments.get(g);
+            for (Map.Entry<User, List<Double>> e : payments.entrySet()) {
+                for (Double d : e.getValue()) {
+                    bc.addBalance(e.getKey(), d);
+                }
             }
         }
         return bc;

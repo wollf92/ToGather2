@@ -43,10 +43,6 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
         double total = db.getCalculatorForGroup(curGroup).getUserTotalPayments(curUser);
         user.setText(curUser.getName());
         balance.setText(Double.toString(total));
-
-//        String currentGroupID = "test"; //to be replaced by setting group balance;
-//        user.setText(itemsArrayList.get(position).getName());
-//        balance.setText(itemsArrayList.get(position).getGroupById(currentGroupID).getBalanceFor(itemsArrayList.get(position).getUniqueID()).toString());
         return rowView;
     }
 }
