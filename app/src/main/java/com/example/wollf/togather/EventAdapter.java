@@ -46,12 +46,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.event_row, parent, false);
-        TextView title = (TextView) rowView.findViewById(R.id.title);
-        TextView desc = (TextView) rowView.findViewById(R.id.desc);
-        TextView date = (TextView) rowView.findViewById(R.id.date);
-        TextView groupName = (TextView) rowView.findViewById(R.id.groupName);
+        TextView title = rowView.findViewById(R.id.title);
+        TextView desc = rowView.findViewById(R.id.desc);
+        TextView date = rowView.findViewById(R.id.date);
+        TextView groupName = rowView.findViewById(R.id.groupName);
 
-        ImageButton more = (ImageButton) rowView.findViewById(R.id.more_event);
+        ImageButton more = rowView.findViewById(R.id.more_event);
 
         title.setText(itemsArrayList.get(position).getTitle());
         desc.setText(itemsArrayList.get(position).getDescription());

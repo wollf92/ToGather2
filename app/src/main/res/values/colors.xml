@@ -8,6 +8,7 @@
     <color name="rowback">#FFF</color>
     <color name="rowbacktint">#FFF</color>
     <color name="darkgrey">#8D99AE</color>
+    <color name="tripback">#e3e3e3</color>
 </resources>
 
 <!-- Original colors

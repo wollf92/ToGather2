@@ -37,7 +37,7 @@ public class BalanceCalculator {
         }
     }
     private Map<User, Double> balance;
-    private Map<User, Double> calculatedBalance;
+
     public BalanceCalculator(){
         balance = new HashMap<>();
     }
@@ -53,7 +53,7 @@ public class BalanceCalculator {
 
     public List<Transaction> calculateTransaction(){
         List<Transaction> minimumTransactions = new ArrayList<>();
-        calculatedBalance = new HashMap<>();
+        Map<User, Double> calculatedBalance = new HashMap<>();
         double sum = getSum(balance.values());
         double res = -(sum / balance.size());
         for(Map.Entry<User, Double> e : balance.entrySet()){

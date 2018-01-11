@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         String name = prefs.getString("name", null);
         String email = prefs.getString("email", null);
 
-        TextView t = (TextView)findViewById(R.id.textView2);
+        TextView t = findViewById(R.id.textView2);
         if (t != null && name != null && email != null) {
             t.setText("Name: " + name + " Email: " + email);
         }
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -36,20 +36,20 @@ public class AddEvent extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        final EditText titleInput = (EditText) findViewById(R.id.event_title);
-        final EditText descInput = (EditText) findViewById(R.id.event_desc);
-        final Button fromDateBtn = (Button) findViewById(R.id.fromBtn);
-        Button toDateBtn = (Button) findViewById(R.id.toBtn);
-        Button addEventBtn = (Button) findViewById(R.id.addEventBtn);
-        toDateText = (EditText) findViewById(R.id.toDateLabel);
-        fromDateText = (EditText) findViewById(R.id.fromDateLabel);
-        final RadioGroup ll = (RadioGroup) findViewById(R.id.groupsRadio);
+        final EditText titleInput = findViewById(R.id.event_title);
+        final EditText descInput = findViewById(R.id.event_desc);
+        final Button fromDateBtn = findViewById(R.id.fromBtn);
+        Button toDateBtn = findViewById(R.id.toBtn);
+        Button addEventBtn = findViewById(R.id.addEventBtn);
+        toDateText = findViewById(R.id.toDateLabel);
+        fromDateText = findViewById(R.id.fromDateLabel);
+        final RadioGroup ll = findViewById(R.id.groupsRadio);
 
 
         Calendar now = Calendar.getInstance();

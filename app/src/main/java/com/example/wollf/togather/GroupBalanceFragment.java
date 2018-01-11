@@ -24,7 +24,7 @@ public class GroupBalanceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_group_balance, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.groupBalanceList);
+        ListView listView = rootView.findViewById(R.id.groupBalanceList);
         SharedPreferences prefs = this.getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         String name = prefs.getString("name", null);
         String email = prefs.getString("email", null);
