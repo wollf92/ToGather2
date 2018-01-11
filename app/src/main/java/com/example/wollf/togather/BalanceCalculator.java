@@ -102,4 +102,8 @@ public class BalanceCalculator {
             sum += d;
         return sum;
     }
+
+    public double getUserTotalPayments(User u){
+        return balance.getOrDefault(u, 0.0);
+    }
 }

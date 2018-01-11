@@ -1,6 +1,7 @@
 package com.example.wollf.togather;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -30,7 +33,7 @@ public class GroupTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private SharedPreferences editor;
     private OnFragmentInteractionListener mListener;
 
     public GroupTab() {
@@ -62,6 +65,7 @@ public class GroupTab extends Fragment {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        editor = this.getActivity().getSharedPreferences("user_data", MODE_PRIVATE);
     }
 
     @Override
@@ -73,7 +77,9 @@ public class GroupTab extends Fragment {
         listView = rootView.findViewById(R.id.groupList);
 
         DataBase db = new DataBase();
-        List<Group> listOfGroups = db.getGroups();
+        String id = editor.getString("ID", null);
+        User u = DataBase.GetUser(id);
+        List<Group> listOfGroups = db.getUserGroups(u);
         GroupAdapter adapter = new GroupAdapter(getContext(), listOfGroups);
 
         listView.setAdapter(adapter);

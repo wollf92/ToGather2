@@ -1,7 +1,10 @@
 package com.example.wollf.togather;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,14 +30,17 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class GroupAdapter extends ArrayAdapter<Group> {
     private final Context context;
     private final List<Group> itemsArrayList;
+    private final SharedPreferences.Editor editor;
 
     public GroupAdapter(Context context, List<Group> itemsArrayList) {
 
         super(context, R.layout.group_row, itemsArrayList);
-
+        this.editor = context.getSharedPreferences("user_data", MODE_PRIVATE).edit();
         this.context = context;
         this.itemsArrayList = itemsArrayList;
     }
@@ -49,7 +55,16 @@ public class GroupAdapter extends ArrayAdapter<Group> {
         TextView title = rowView.findViewById(R.id.title);
         TextView desc = rowView.findViewById(R.id.desc);
         TextView date = rowView.findViewById(R.id.date);
-
+        Button button = (Button)rowView.findViewById(R.id.balance_button);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Log.i("groupIDSET", itemsArrayList.get(position).uniqueID);
+                editor.putString("groupID", itemsArrayList.get(position).uniqueID);
+                editor.commit();
+                Intent i = new Intent(getContext(), GroupBalance.class);
+                getContext().startActivity(i);
+            }
+        });
         ImageButton more = rowView.findViewById(R.id.more_event);
 
         String users = "";
