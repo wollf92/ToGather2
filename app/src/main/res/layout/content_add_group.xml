@@ -20,7 +20,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add group"
+            android:text="Group Name"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -34,6 +34,14 @@
             android:text="Name"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="54dp" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Participants"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
 
     </LinearLayout>
 
