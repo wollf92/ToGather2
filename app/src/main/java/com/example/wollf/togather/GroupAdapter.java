@@ -69,7 +69,7 @@ public class GroupAdapter extends ArrayAdapter<Group> {
 
         String users = "";
         for (User a : itemsArrayList.get(position).getUsers()) {
-            users += a.getName() + " ";
+            users += " • " + a.getName() + "\n";
         }
 
         title.setText(itemsArrayList.get(position).getGroupName());

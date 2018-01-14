@@ -24,6 +24,25 @@ public class User implements Serializable{
     private String[] allergies;
     private Calendar join_date;
     private String uniqueID;
+    private String tikkie_user_token;
+    private String tikkie_iban_token;
+
+    public String getTikkie_user_token() {
+        return tikkie_user_token;
+    }
+
+    public void setTikkie_user_token(String tikkie_user_token) {
+        this.tikkie_user_token = tikkie_user_token;
+    }
+
+    public String getTikkie_iban_token() {
+        return tikkie_iban_token;
+    }
+
+    public void setTikkie_iban_token(String tikkie_iban_token) {
+        this.tikkie_iban_token = tikkie_iban_token;
+    }
+
     private Map<String, Group> groups;
 
     public User(String name, String email, String password){
@@ -34,11 +53,13 @@ public class User implements Serializable{
         // TODO: to be initialized in contructor
         this.IBAN = "NL23RABO34";
         this.phone = "4083204";
+        this.tikkie_user_token = "2099e755-ab32-4e80-b6fc-b870155b12de";
+        this.tikkie_iban_token = "2e01490c-972b-4b21-9233-cc87b91ba044";
         this.join_date = Calendar.getInstance();
         groups = new HashMap<>();
     }
 
-    public User(String name, String email, String password,String iban, String phone){
+    public User(String name, String email, String password,String iban, String phone, String tikkie_user, String tikkie_iban){
         this.uniqueID = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
@@ -47,6 +68,8 @@ public class User implements Serializable{
         this.IBAN = iban;
         this.phone = phone;
         this.join_date = Calendar.getInstance();
+        this.tikkie_user_token = tikkie_user;
+        this.tikkie_iban_token = tikkie_iban;
     }
 
     public String getUniqueID() { return uniqueID; }

@@ -68,19 +68,22 @@ public class AddEvent extends AppCompatActivity implements
                 true
         );
 
-        fromDateBtn.setOnClickListener(new View.OnClickListener() {
+        fromDateText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
-                tpd.show(getFragmentManager(), "fromTime");
-                dpd.show(getFragmentManager(), "fromDate");
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    tpd.show(getFragmentManager(), "fromTime");
+                    dpd.show(getFragmentManager(), "fromDate");
+                }
             }
         });
 
-        toDateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tpd.show(getFragmentManager(), "toTime");
-                dpd.show(getFragmentManager(), "toDate");
+        toDateText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus){
+                    tpd.show(getFragmentManager(), "toTime");
+                    dpd.show(getFragmentManager(), "toDate");
+                }
             }
         });
 

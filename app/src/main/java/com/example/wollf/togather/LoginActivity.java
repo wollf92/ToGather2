@@ -88,6 +88,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Button register = findViewById(R.id.register_btn);
+        register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, Register.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -177,6 +186,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            showProgress(false);
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -339,7 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 editor.putString("ID",u.getUniqueID());
                 editor.putString("name", u.getName());
                 editor.putString("email", u.getEmail());
-                editor.apply();
+                editor.commit();
 
                 Intent i = new Intent(getApplicationContext(), TabbedActivity.class);
                 startActivity(i);
@@ -347,6 +357,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+                showProgress(false);
             }
         }
 

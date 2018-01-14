@@ -15,24 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Must pay: " />
+        android:text="owes me" />
 
     <TextView
         android:id="@+id/calculated_balance_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/calculated_balance_touser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="to user: " />
-
-    <TextView
-        android:id="@+id/calculated_balance_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -43,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_weight="1"
-        android:text="pay"
+        android:text="Send tikkie"
         android:textSize="8sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 </LinearLayout>

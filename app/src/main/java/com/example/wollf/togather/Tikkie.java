@@ -270,6 +270,7 @@ class Requests extends AsyncTask<String, Void, JSONObject> {
             inStream.close();
             urlConnection.disconnect();
             object = (JSONObject) new JSONTokener(response).nextValue();
+            object.put("response_code", responseCode);
         } catch (Exception e) {
             this.mException = e;
         } finally {

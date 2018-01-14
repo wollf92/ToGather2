@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,14 +70,16 @@ public class ProfileTab extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_profile_tab, container, false);
         String id = editor.getString("ID", null);
-        User u = DataBase.GetUser(id);
-        TextView n = rootView.findViewById(R.id.profileName);
+        DataBase db = new DataBase();
+        User u = db.GetUser(id);
+        TextView n = rootView.findViewById(R.id.user_profile_name);
         n.setText(u.getName());
-        TextView t = rootView.findViewById(R.id.bankAccountText);
-        t.setText(u.getIBAN());
-        TextView e = rootView.findViewById(R.id.emailAddressText);
+        TextView e = rootView.findViewById(R.id.user_profile_short_bio);
         e.setText(u.getEmail());
-        //TextView d = (TextView)rootView.findViewById(R.id.
+        TextView t = rootView.findViewById(R.id.iban_field);
+        t.setText(Html.fromHtml(t.getText() + " <big><b>" + u.getIBAN() + "</b></big>"));
+        TextView p = rootView.findViewById(R.id.phone_field);
+        p.setText(Html.fromHtml(p.getText() + " <big><b>" + u.getPhone() + "</b></big>"));
         return rootView;
     }
 

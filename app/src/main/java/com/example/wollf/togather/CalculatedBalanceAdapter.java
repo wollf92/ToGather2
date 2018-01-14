@@ -1,12 +1,18 @@
 package com.example.wollf.togather;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -32,19 +38,44 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final Context context = parent.getContext();
 
         View rowView = inflater.inflate(R.layout.calculated_balance_row, parent, false);
         TextView from = rowView.findViewById(R.id.calculated_balance_from);
         TextView total = rowView.findViewById(R.id.calculated_balance_total);
-        TextView to = rowView.findViewById(R.id.calculated_balance_to);
+        Button btn = rowView.findViewById(R.id.calculated_balance_pay);
+
         DataBase db = new DataBase();
         User curUser = db.GetUser(sp.getString("ID",null));
-        Transaction transaction = itemsArrayList.get(position);
+        final Transaction transaction = itemsArrayList.get(position);
         from.setText(transaction.getFrom());
-        total.setText(Double.toString(transaction.getAmount()));
-        to.setText(transaction.getTo());
+        total.setText(Double.toString(transaction.getAmount()) + " €");
         if(curUser.getName().equals(transaction.getFrom()))
             rowView.findViewById(R.id.calculated_balance_pay).setVisibility(View.VISIBLE);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tikkie tikkie = new Tikkie(context);
+                JSONObject response = tikkie.get_payment_request("2099e755-ab32-4e80-b6fc-b870155b12de",
+                        "2e01490c-972b-4b21-9233-cc87b91ba044",
+                        1234,
+                        "Dinner");
+                String link = null;
+                try {
+                    link = response.getString("paymentRequestUrl");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me " + transaction.getAmount() + "€\nLink: " + link);
+                sendIntent.setType("text/plain");
+                sendIntent.setPackage("com.whatsapp");
+                context.startActivity(sendIntent);
+                // Log.d("access", tikkie.get_access_token());
+            }
+        });
 
         return rowView;
     }

@@ -25,19 +25,11 @@ public class GroupBalanceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_group_balance, container, false);
 
         ListView listView = rootView.findViewById(R.id.groupBalanceList);
         ListView listView2 = rootView.findViewById(R.id.calculatedBalanceList);
-        Button tikkieButton = rootView.findViewById(R.id.calculate_tikkies_button);
-
-//        tikkieButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getContext(), CalculatedBalance.class);
-//                getContext().startActivity(i);
-//            }
-//        });
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         String name = prefs.getString("name", null);

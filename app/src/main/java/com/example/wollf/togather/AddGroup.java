@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -27,7 +30,7 @@ public class AddGroup extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        LinearLayout ll = findViewById(R.id.users_list);
+        LinearLayout ll = findViewById(R.id.checkbox_list);
         Button addBtn = findViewById(R.id.addGroupBtn);
         final EditText groupNameText = findViewById(R.id.group_name);
 
@@ -38,7 +41,7 @@ public class AddGroup extends AppCompatActivity {
         for (User x : users) {
             CheckBox cb = new CheckBox(getApplicationContext());
             cb.setTag(x);
-            cb.setText(x.getName());
+            cb.setText(Html.fromHtml("<big>" + x.getName() + "</big>"));
             ll.addView(cb);
             cbList.add(cb);
         }

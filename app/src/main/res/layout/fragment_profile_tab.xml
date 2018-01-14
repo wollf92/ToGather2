@@ -1,379 +1,104 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/profile_background"
-    android:backgroundTint="#e3e3e3"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="@dimen/appbar_padding_top"
-    tools:context="com.example.wollf.togather.ProfileTab"
-    tools:targetApi="lollipop">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.4" />
-
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="0.2"
-                    android:src="@drawable/profilepicture"
-                    app:civ_border_color="#FFFFFFF0"
-                    app:civ_border_width="0dp" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3" />
-
-                <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:background="@color/lightmask"
-                    android:elevation="18dp"
-                    tools:targetApi="lollipop" />
-
-                <!--app:srcCompat="?android:attr/floatingToolbarOpenDrawable"-->
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/profileName"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_weight="0.2"
-                    android:autoSizeTextType="uniform"
-                    android:gravity="center"
-                    android:inputType="textPersonName"
-                    android:text="John Doe"
-                    tools:targetApi="o" />
-
-            </LinearLayout>
-
-
-
-        <Space
+        <ImageView
+            android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"/>
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:background="@drawable/profile_circular_border_imageview"
+            android:elevation="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profilepicture" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:text="Name"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
+            <TextView
+                android:id="@+id/user_profile_short_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_profile_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="Email"
+                android:textColor="#fff"
+                android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/descriptionText"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/lightmask"
-                        android:text="Hi my name is Mike and I like kittens" />
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="10dp" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="match_parent" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <ImageView
-                            android:id="@+id/imageAllergy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_gravity="top|left"
-                            android:adjustViewBounds="true"
-                            android:foregroundGravity="top|left"
-                            android:scaleType="fitStart"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            app:srcCompat="@drawable/cutlery" />
-
-                        <Space
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="match_parent" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="0.5"
-                                android:gravity="center_vertical"
-                                android:text="Allergies"
-                                android:textStyle="bold" />
-
-                            <ExpandableListView
-                                android:id="@+id/allergyView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
-                                android:theme="@style/AppTheme" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@android:color/background_dark" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <ImageView
-                            android:id="@+id/imageEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_gravity="top|left"
-                            android:adjustViewBounds="true"
-                            android:foregroundGravity="top|left"
-                            android:scaleType="fitCenter"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            app:srcCompat="@drawable/envelope" />
-
-                        <Space
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="match_parent" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:gravity="center_vertical"
-                                android:text="Email Address"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/emailAddressText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:text="Email address not set" />
-
-                            <View
-                                android:id="@+id/textureView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@android:color/background_dark"
-                                tools:ignore="DuplicateIds" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <ImageView
-                            android:id="@+id/imageBirthday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_gravity="top|left"
-                            android:adjustViewBounds="true"
-                            android:foregroundGravity="top|left"
-                            android:scaleType="fitStart"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            app:srcCompat="@drawable/calendar" />
-
-                        <Space
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="match_parent" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:gravity="center_vertical"
-                                android:text="Birthday"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/birthdayText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:text="Birthday not set" />
-
-                            <View
-                                android:id="@+id/textureView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@android:color/background_dark" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <ImageView
-                            android:id="@+id/imageBankaccount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_gravity="top|left"
-                            android:layout_weight="0"
-                            android:adjustViewBounds="true"
-                            android:foregroundGravity="top|left"
-                            android:scaleType="fitCenter"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            app:srcCompat="@drawable/credit_card" />
-
-                        <Space
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="match_parent" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:weightSum="1">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:gravity="center_vertical"
-                                android:text="Bank Account"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/bankAccountText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".5"
-                                android:gravity="top"
-                                android:text="Banknr not set" />
-
-                            <View
-                                android:id="@+id/textureView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:background="@android:color/background_dark" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <Space
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="wrap_content" />
-
-                </TableRow>
+        </RelativeLayout>
 
 
-            </LinearLayout>
-        </ScrollView>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/iban_field"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Bank account" />
 
-</FrameLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:id="@+id/phone_field"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Phone number" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="20dp"
+                android:text="Dietary preferences" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

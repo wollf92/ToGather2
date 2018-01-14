@@ -35,20 +35,9 @@
         android:id="@+id/desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_marginStart="11dp"
-        android:layout_toEndOf="@+id/textView"
-        android:maxWidth="220dp"
-        android:text="Desc" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title"
-        android:text="Members:" />
+        android:text="members" />
 
     <Button
         android:id="@+id/balance_button"

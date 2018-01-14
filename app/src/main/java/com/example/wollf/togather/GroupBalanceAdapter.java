@@ -2,10 +2,12 @@ package com.example.wollf.togather;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -43,6 +45,7 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
         double total = db.getCalculatorForGroup(curGroup).getUserTotalPayments(curUser);
         user.setText(curUser.getName());
         balance.setText(Double.toString(total));
+
         return rowView;
     }
 }
