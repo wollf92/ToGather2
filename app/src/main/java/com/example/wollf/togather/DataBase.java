@@ -104,6 +104,9 @@ public class DataBase {
         balance1.get(g.getUsers().get(0)).add(3.0);
         balance1.put(g.getUsers().get(1), new ArrayList<Double>());
         balance1.get(g.getUsers().get(1)).add(2.0);
+        balance1.get(g.getUsers().get(1)).add(4.0);
+        balance1.put(g.getUsers().get(2),new ArrayList<Double>());
+        balance1.get(g.getUsers().get(2)).add(3.0);
         put(g, balance1);
     }};
 
