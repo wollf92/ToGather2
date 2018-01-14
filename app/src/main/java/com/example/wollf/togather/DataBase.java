@@ -203,7 +203,7 @@ public class DataBase {
                 Log.i("grouPayments", Arrays.toString(groupPayments));
                 if (groupPayments.length == 3) {
                     Group group = getGroup(groupPayments[0]);
-                    if (group.uniqueID == g.uniqueID) {
+                    if (group != null && group.uniqueID == g.uniqueID) {
                         User u = getUser(groupPayments[1]);
                         bc.addBalance(u, Double.parseDouble(groupPayments[2]));
                     }

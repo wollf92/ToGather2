@@ -29,6 +29,7 @@ public class AddEventBalance extends AppCompatActivity {
                 e.putString("groupPayments", (whatsThere == null ? "" : ",") + groupString+"|"+userString+"|"+amount.getText());
                 e.commit();
                 Log.i("commited:", sharedPreferences.getString("groupPayments","empty"));
+                finish();
             }
         });
         sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
