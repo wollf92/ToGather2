@@ -71,7 +71,7 @@ public class BalanceCalculator {
     private void recursiveCalculate(Map<User, Double> calculatedBalance, List<Transaction> minimumTransactions) {
         Map.Entry<User, Double> mxCredit = getMax(calculatedBalance);
         Map.Entry<User, Double> mxDebit = getMin(calculatedBalance);
-        if(mxCredit.getValue().doubleValue() <= 0.01 && mxDebit.getValue().doubleValue() <= 0.01)
+        if(mxCredit.getValue().doubleValue() < 0.01 && mxDebit.getValue().doubleValue() < 0.01)
             return;
         double min = Math.min(-mxDebit.getValue(),mxCredit.getValue());
         calculatedBalance.put(mxCredit.getKey(),mxCredit.getValue() - min);
