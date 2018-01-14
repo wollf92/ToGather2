@@ -63,8 +63,10 @@ public class BalanceCalculator {
         for(Map.Entry<User, Double> e : balance.entrySet()){
             calculatedBalance.put(e.getKey(), e.getValue() + res);
         }
-        System.out.println(calculatedBalance);
-        recursiveCalculate(calculatedBalance, minimumTransactions);
+        if(calculatedBalance.size() > 0) {
+            System.out.println(calculatedBalance);
+            recursiveCalculate(calculatedBalance, minimumTransactions);
+        }
         return minimumTransactions;
     }
 
@@ -81,13 +83,13 @@ public class BalanceCalculator {
     }
 
     private Map.Entry<User,Double> getMax(Map<User, Double> calculatedBalance) {
-        Map.Entry<User, Double> max = calculatedBalance.entrySet().iterator().next();
-        for(Map.Entry<User, Double> e : calculatedBalance.entrySet()){
-            if(e.getValue() > max.getValue()){
-                max = e;
+            Map.Entry<User, Double> max = calculatedBalance.entrySet().iterator().next();
+            for (Map.Entry<User, Double> e : calculatedBalance.entrySet()) {
+                if (e.getValue() > max.getValue()) {
+                    max = e;
+                }
             }
-        }
-        return max;
+            return max;
     }
 
     private Map.Entry<User, Double> getMin(Map<User, Double> calculatedBalance){

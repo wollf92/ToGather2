@@ -50,7 +50,7 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         final User curUser = db.getUser(sp.getString("ID",null));
         final Transaction transaction = itemsArrayList.get(position);
         from.setText(transaction.getFrom());
-        total.setText(Double.toString(transaction.getAmount()) + " €");
+        total.setText("€"+Double.toString(transaction.getAmount()));
         if(curUser.getName().equals(transaction.getFrom()))
             rowView.findViewById(R.id.calculated_balance_pay).setVisibility(View.VISIBLE);
 
@@ -76,7 +76,7 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                 }
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me " + transaction.getAmount() + "€\n\n" + link);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me €" + transaction.getAmount() + "\n\n" + link);
                 sendIntent.setType("text/plain");
                 if (isAppInstalled(context, "com.whatsapp"))
                     sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash

@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/calculated_balance_from"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="user1" />
@@ -14,21 +14,22 @@
         android:id="@+id/calculated_balance_mustpay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:text="owes me" />
 
     <TextView
         android:id="@+id/calculated_balance_total"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_weight="0"
+        android:text="TextView"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/calculated_balance_pay"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:text="Send tikkie"
         android:textSize="8sp"
         android:visibility="visible" />

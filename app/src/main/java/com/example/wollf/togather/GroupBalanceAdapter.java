@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
         Group curGroup = db.getGroup(sp.getString("groupID", null));
         double total = db.getCalculatorForGroup(curGroup).getUserTotalPayments(curUser);
         user.setText(curUser.getName());
-        balance.setText(Double.toString(total));
+        balance.setText("€"+new DecimalFormat(".##").format(total));
 
         return rowView;
     }
