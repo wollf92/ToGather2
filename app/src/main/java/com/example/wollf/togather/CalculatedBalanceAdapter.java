@@ -3,6 +3,7 @@ package com.example.wollf.togather;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,14 +70,25 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                 }
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me " + transaction.getAmount() + "€\nLink: " + link);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me " + transaction.getAmount() + "€\n\n" + link);
                 sendIntent.setType("text/plain");
-                sendIntent.setPackage("com.whatsapp");
+                if (isAppInstalled(context, "com.whatsapp"))
+                    sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash
                 context.startActivity(sendIntent);
                 // Log.d("access", tikkie.get_access_token());
             }
         });
 
         return rowView;
+    }
+
+    public static boolean isAppInstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }

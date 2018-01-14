@@ -11,9 +11,6 @@
     tools:context="com.example.wollf.togather.GroupTab"
     tools:targetApi="lollipop">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

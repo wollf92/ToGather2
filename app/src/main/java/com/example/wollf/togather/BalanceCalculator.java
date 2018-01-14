@@ -1,5 +1,9 @@
 package com.example.wollf.togather;
 
+import android.util.Log;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,7 +59,7 @@ public class BalanceCalculator {
         List<Transaction> minimumTransactions = new ArrayList<>();
         Map<User, Double> calculatedBalance = new HashMap<>();
         double sum = getSum(balance.values());
-        double res = -(sum / balance.size());
+        double res = -sum / balance.size();
         for(Map.Entry<User, Double> e : balance.entrySet()){
             calculatedBalance.put(e.getKey(), e.getValue() + res);
         }
@@ -67,10 +71,10 @@ public class BalanceCalculator {
     private void recursiveCalculate(Map<User, Double> calculatedBalance, List<Transaction> minimumTransactions) {
         Map.Entry<User, Double> mxCredit = getMax(calculatedBalance);
         Map.Entry<User, Double> mxDebit = getMin(calculatedBalance);
-        if(mxCredit.getValue().doubleValue() == 0.0 && mxDebit.getValue().doubleValue() == 0.0)
+        if(mxCredit.getValue().doubleValue() < 0.01 && mxDebit.getValue().doubleValue() < 0.01)
             return;
         double min = Math.min(-mxDebit.getValue(),mxCredit.getValue());
-        calculatedBalance.put(mxCredit.getKey(), mxCredit.getValue() - min);
+        calculatedBalance.put(mxCredit.getKey(),mxCredit.getValue() - min);
         calculatedBalance.put(mxDebit.getKey(), mxDebit.getValue() + min);
         minimumTransactions.add(new Transaction(mxDebit.getKey(), min, mxCredit.getKey()));
         recursiveCalculate(calculatedBalance, minimumTransactions);
@@ -101,6 +105,13 @@ public class BalanceCalculator {
         for(double d : values)
             sum += d;
         return sum;
+    }
+
+    private double round2(double input){
+        DecimalFormat to2Round = new DecimalFormat(".##");
+        to2Round.setRoundingMode(RoundingMode.DOWN);
+        Log.i("round", to2Round.format(input));
+        return Double.valueOf(to2Round.format(input));
     }
 
     public double getUserTotalPayments(User u){
