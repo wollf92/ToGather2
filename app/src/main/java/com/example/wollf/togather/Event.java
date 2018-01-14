@@ -32,6 +32,7 @@ public class Event {
         this.endTime = endTime;
         this.uniqueID = UUID.randomUUID().toString();
         this.group = group;
+        this.usersFromGroup = group.getUsers();
     }
 
     public Group getFrom() {
@@ -49,6 +50,8 @@ public class Event {
     public void setUsersFromGroup(List<User> usersFromGroup) {
         this.usersFromGroup = usersFromGroup;
     }
+
+    public Group getGroup (){return group;}
 
     public int getTypeOfEvent() {
         return typeOfEvent;

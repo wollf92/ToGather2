@@ -71,7 +71,7 @@ public class ProfileTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile_tab, container, false);
         String id = editor.getString("ID", null);
         DataBase db = new DataBase();
-        User u = db.GetUser(id);
+        User u = db.getUser(id);
         TextView n = rootView.findViewById(R.id.user_profile_name);
         n.setText(u.getName());
         TextView e = rootView.findViewById(R.id.user_profile_short_bio);

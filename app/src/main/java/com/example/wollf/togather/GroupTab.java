@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,7 @@ public class GroupTab extends Fragment {
 
         DataBase db = new DataBase();
         String id = editor.getString("ID", null);
-        User u = DataBase.GetUser(id);
+        User u = DataBase.getUser(id);
         List<Group> listOfGroups = db.getUserGroups(u);
         GroupAdapter adapter = new GroupAdapter(getContext(), listOfGroups);
 

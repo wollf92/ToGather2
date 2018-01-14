@@ -55,7 +55,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Register"
-            android:label="@string/title_activity_register"></activity>
+            android:label="@string/title_activity_register" />
+        <activity android:name=".AddEventBalance"></activity>
     </application>
 
 </manifest>

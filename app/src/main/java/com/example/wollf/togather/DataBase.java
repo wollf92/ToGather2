@@ -5,6 +5,9 @@ package com.example.wollf.togather;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.widget.ShareActionProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +22,12 @@ import java.util.Map;
  * Class for talking with the specific database connection, to set-up in the future.
  */
 public class DataBase {
+    String gpps;
+    public DataBase(){ gpps = null;
+    }
+    public DataBase(String groupPayments){
+        this.gpps = groupPayments;
+    }
 
     private static List<User> DUMMYDATA = new ArrayList<User>(Arrays.asList(
             new User("Michael de Kaste","user1@mail.com","password1", "NL61RABO0107981491", " 0612340128",
@@ -129,7 +138,7 @@ public class DataBase {
      * Dummy data for now
      * @return
      */
-    public static User GetUser(String id){
+    public static User getUser(String id){
         return DUMMYDATAMAP.get(id);
     }
     public static List<User> getUsers(){
@@ -143,7 +152,6 @@ public class DataBase {
     }
     public void addUser(User u){
         DUMMYDATA.add(u);
-        DUMMYDATAMAP = toMap(DUMMYDATA);
     }
     public void addEvent(Event e) {
         Events.add(e);
@@ -186,6 +194,31 @@ public class DataBase {
                 }
             }
         }
+        Log.i("contextualv1", gpps == null ? "any" : gpps);
+        if(gpps != null){
+            String groupPaymentsMore = gpps;
+            String[] payments = groupPaymentsMore.split(",");
+            for(String gp : payments) {
+                String[] groupPayments = gp.split("\\|");
+                Log.i("grouPayments", Arrays.toString(groupPayments));
+                if (groupPayments.length == 3) {
+                    Group group = getGroup(groupPayments[0]);
+                    if (group.uniqueID == g.uniqueID) {
+                        User u = getUser(groupPayments[1]);
+                        bc.addBalance(u, Double.parseDouble(groupPayments[2]));
+                    }
+                }
+            }
+        }
+
         return bc;
+    }
+    public List<Event> getEventsForUser(User u){
+        List<Event> toReturn = new ArrayList<>();
+        for(Event e : Events){
+            if(e.getUsersFromGroup().contains(u))
+                toReturn.add(e);
+        }
+        return toReturn;
     }
 }

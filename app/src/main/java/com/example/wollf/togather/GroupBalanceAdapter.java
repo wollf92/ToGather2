@@ -39,7 +39,7 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
         View rowView = inflater.inflate(R.layout.user_balance_row, parent, false);
         TextView user = rowView.findViewById(R.id.balanceUserName);
         TextView balance = rowView.findViewById(R.id.balanceUserBalance);
-        DataBase db = new DataBase();
+        DataBase db = new DataBase(sp.getString("groupPayments",null));
         User curUser = itemsArrayList.get(position);
         Group curGroup = db.getGroup(sp.getString("groupID", null));
         double total = db.getCalculatorForGroup(curGroup).getUserTotalPayments(curUser);

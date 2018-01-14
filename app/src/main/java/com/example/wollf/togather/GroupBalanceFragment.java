@@ -37,7 +37,7 @@ public class GroupBalanceFragment extends Fragment {
         String groupID = prefs.getString("groupID", null);
 
         Log.i("groupIDGET", groupID);
-        DataBase db = new DataBase();
+        DataBase db = new DataBase(prefs.getString("groupPayments",null));
         List<User> listOfUsers = db.getGroup(groupID).getUsers(); // Do async task as it may take long time with real DB
         GroupBalanceAdapter adapter = new GroupBalanceAdapter(getContext(), listOfUsers);
         BalanceCalculator bc = db.getCalculatorForGroup(db.getGroup(groupID));

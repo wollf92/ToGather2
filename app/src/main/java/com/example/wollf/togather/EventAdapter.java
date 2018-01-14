@@ -1,35 +1,24 @@
 package com.example.wollf.togather;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.wollf.togather.Event;
-import com.example.wollf.togather.R;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class EventAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> itemsArrayList;
+    private final SharedPreferences sharedPreferences;
 
     public EventAdapter(Context context, List<Event> itemsArrayList) {
 
@@ -37,6 +26,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         this.context = context;
         this.itemsArrayList = itemsArrayList;
+        this.sharedPreferences = context.getSharedPreferences("user_data",Context.MODE_PRIVATE);
     }
 
     @Override
@@ -76,17 +66,20 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public void showPopup(View v, final int pos) {
         PopupMenu popup = new PopupMenu(context, v);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.event_row_menu, popup.getMenu());
-
-        // Edit btn
+        popup.getMenu().add(0,0,0,"Add Balance");
         popup.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(context, itemsArrayList.get(pos).getUniqueID(), Toast.LENGTH_SHORT)
-                        .show();
+            public boolean onMenuItemClick(MenuItem item) {
+                //ADD EVENT TO SHARED
+                sharedPreferences.edit().putString("eventID", itemsArrayList.get(pos).uniqueID);
+                sharedPreferences.edit().putString("groupID", itemsArrayList.get(pos).getGroup().uniqueID);
+                sharedPreferences.edit().commit();
+                Intent i = new Intent(getContext(), AddEventBalance.class);
+                getContext().startActivity(i);
                 return true;
             }
         });
+        inflater.inflate(R.menu.event_row_menu, popup.getMenu());
 
         popup.show();
     }

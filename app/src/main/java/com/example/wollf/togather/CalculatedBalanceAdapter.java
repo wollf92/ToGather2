@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         Button btn = rowView.findViewById(R.id.calculated_balance_pay);
 
         DataBase db = new DataBase();
-        User curUser = db.GetUser(sp.getString("ID",null));
+        User curUser = db.getUser(sp.getString("ID",null));
         final Transaction transaction = itemsArrayList.get(position);
         from.setText(transaction.getFrom());
         total.setText(Double.toString(transaction.getAmount()) + " €");

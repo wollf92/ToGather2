@@ -8,10 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class EventTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private SharedPreferences editor;
     private OnFragmentInteractionListener mListener;
 
     public EventTab() {
@@ -66,7 +63,7 @@ public class EventTab extends Fragment {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        editor = this.getActivity().getSharedPreferences("user_data", MODE_PRIVATE);
     }
 
     @Override
@@ -76,9 +73,10 @@ public class EventTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_event_tab, container, false);
 
         listView = rootView.findViewById(R.id.eventList);
-
         DataBase db = new DataBase();
-        List<Event> listOfEvents = db.getEvents();
+        String id = editor.getString("ID", null);
+        User u = DataBase.getUser(id);
+        List<Event> listOfEvents = db.getEventsForUser(u);
         EventAdapter adapter = new EventAdapter(getContext(), listOfEvents);
 
         listView.setAdapter(adapter);
