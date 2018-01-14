@@ -31,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private void openWhatsApp() {
+        String smsNumber = "31618388915"; // E164 format without '+' sign
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.putExtra("jid", smsNumber + "@s.whatsapp.net"); //phone number without "+" prefix
+        sendIntent.setPackage("com.whatsapp");
+        /*if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+            Toast.makeText(this, "Error/n" + e.toString(), Toast.LENGTH_SHORT).show();
+            return;
+        }*/
+        startActivity(sendIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

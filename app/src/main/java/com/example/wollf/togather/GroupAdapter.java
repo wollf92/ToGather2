@@ -11,11 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,9 +56,8 @@ public class GroupAdapter extends ArrayAdapter<Group> {
 
         View rowView = inflater.inflate(R.layout.group_row, parent, false);
         TextView title = rowView.findViewById(R.id.title);
-        TextView desc = rowView.findViewById(R.id.desc);
-        TextView date = rowView.findViewById(R.id.date);
-        Button button = (Button)rowView.findViewById(R.id.balance_button);
+        Button button = (Button) rowView.findViewById(R.id.balance_button);
+        LinearLayout members_view = ((LinearLayout) rowView.findViewById(R.id.group_members));
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Log.i("groupIDSET", itemsArrayList.get(position).uniqueID);
@@ -65,36 +67,38 @@ public class GroupAdapter extends ArrayAdapter<Group> {
                 getContext().startActivity(i);
             }
         });
-        ImageButton more = rowView.findViewById(R.id.more_event);
 
-        String users = "";
-        for (User a : itemsArrayList.get(position).getUsers()) {
-            users += " • " + a.getName() + "\n";
+        for (final User a : itemsArrayList.get(position).getUsers()) {
+            //users += " • " + a.getName() + " " + btnTag + "\n";
+            View group_member = inflater.inflate(R.layout.group_member, parent, false);
+            TextView member_name = group_member.findViewById(R.id.member_name);
+            Button member_send = group_member.findViewById(R.id.member_send);
+
+            member_send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openWhatsApp(a.getPhone());
+                }
+            });
+
+            member_name.setText(a.getName());
+            member_send.setText("Send message");
+
+            members_view.addView(group_member);
         }
 
         title.setText(itemsArrayList.get(position).getGroupName());
-        desc.setText(users);
+        //desc.setText(users);
 
         return rowView;
     }
 
-    /*
-    public void showPopup(View v, final int pos) {
-        PopupMenu popup = new PopupMenu(context, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.event_row_menu, popup.getMenu());
-
-        // Edit btn
-        popup.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(context, itemsArrayList.get(pos).getUniqueID(), Toast.LENGTH_SHORT)
-                        .show();
-                return true;
-            }
-        });
-
-        popup.show();
+    private void openWhatsApp(String number) {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+        sendIntent.putExtra("jid", number + "@s.whatsapp.net"); //phone number without "+" prefix
+        sendIntent.setPackage("com.whatsapp");
+        context.startActivity(sendIntent);
     }
-    */
 }
