@@ -73,7 +73,9 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                 }
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, transaction.getFrom() + " you owe me €" + transaction.getAmount() + "\n\n" + link);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey, I just calculated out mutual balance and you owe me €" + transaction.getAmount() +
+                                ". Would you like to pay me? You can do so using this Tikkie below.\n\n" + link);
                 sendIntent.setType("text/plain");
                 if (isAppInstalled(context, "com.whatsapp"))
                     sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash

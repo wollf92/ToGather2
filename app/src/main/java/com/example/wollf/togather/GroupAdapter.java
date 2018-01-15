@@ -72,7 +72,7 @@ public class GroupAdapter extends ArrayAdapter<Group> {
             //users += " • " + a.getName() + " " + btnTag + "\n";
             View group_member = inflater.inflate(R.layout.group_member, parent, false);
             TextView member_name = group_member.findViewById(R.id.member_name);
-            Button member_send = group_member.findViewById(R.id.member_send);
+            ImageButton member_send = group_member.findViewById(R.id.member_send);
 
             member_send.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,8 +82,6 @@ public class GroupAdapter extends ArrayAdapter<Group> {
             });
 
             member_name.setText(a.getName());
-            member_send.setText("Send message");
-
             members_view.addView(group_member);
         }
 
