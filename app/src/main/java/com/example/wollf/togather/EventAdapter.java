@@ -19,6 +19,11 @@ class EventAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> itemsArrayList;
     private final SharedPreferences sharedPreferences;
+    private View rowView;
+    private TextView title;
+    private TextView desc;
+    private TextView date;
+    private TextView groupName;
 
     public EventAdapter(Context context, List<Event> itemsArrayList) {
 
@@ -34,12 +39,7 @@ class EventAdapter extends ArrayAdapter<Event> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View rowView = inflater.inflate(R.layout.event_row, parent, false);
-        TextView title = rowView.findViewById(R.id.title);
-        TextView desc = rowView.findViewById(R.id.desc);
-        TextView date = rowView.findViewById(R.id.date);
-        TextView groupName = rowView.findViewById(R.id.groupName);
+        setVars(inflater, parent);
 
         ImageButton more = rowView.findViewById(R.id.more_event);
 
@@ -70,6 +70,14 @@ class EventAdapter extends ArrayAdapter<Event> {
         });
 
         return rowView;
+    }
+
+    private void setVars(LayoutInflater inflater, ViewGroup parent) {
+        rowView = inflater.inflate(R.layout.event_row, parent, false);
+        title = rowView.findViewById(R.id.title);
+        desc = rowView.findViewById(R.id.desc);
+        date = rowView.findViewById(R.id.date);
+        groupName = rowView.findViewById(R.id.groupName);
     }
 
     private void showPopup(View v, final int pos) {
