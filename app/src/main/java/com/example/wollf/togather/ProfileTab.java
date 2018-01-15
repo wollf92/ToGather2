@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -37,15 +38,13 @@ public class ProfileTab extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ProfileTab.
      */
-    public static ProfileTab newInstance(String param1, String param2){
+    public static ProfileTab newInstance(){
         ProfileTab fragment = new ProfileTab();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, null);
+        args.putString(ARG_PARAM2, null);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,7 +60,7 @@ public class ProfileTab extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -69,7 +68,7 @@ public class ProfileTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profile_tab, container, false);
         String id = editor.getString("ID", null);
         DataBase db = new DataBase();
-        User u = db.getUser(id);
+        User u = DataBase.getUser(id);
         TextView n = rootView.findViewById(R.id.user_profile_name);
         n.setText(u.getName());
         TextView e = rootView.findViewById(R.id.user_profile_short_bio);

@@ -2,8 +2,8 @@ package com.example.wollf.togather;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -103,7 +103,7 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
 
     }
 
-    void showAddButton(int position){
+    private void showAddButton(int position){
         switch (position){
             case 0:
                 /*fabGroup.hide(new FloatingActionButton.OnVisibilityChangedListener() {
@@ -184,11 +184,10 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_default, container, false);
 
-            return rootView;
+            return inflater.inflate(R.layout.fragment_default, container, false);
         }
     }
 
@@ -207,11 +206,11 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 0) {
-                return EventTab.newInstance(null, null);
+                return EventTab.newInstance();
             } else if (position == 1){
-                return GroupTab.newInstance(null, null);
+                return GroupTab.newInstance();
             } else if (position == 2){
-                return ProfileTab.newInstance(null, null);
+                return ProfileTab.newInstance();
             }
             return PlaceholderFragment.newInstance(position + 1);
         }

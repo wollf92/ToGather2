@@ -8,20 +8,20 @@ import java.util.UUID;
  * Created by wollf on 17-10-2017.
  */
 
-public class Event {
+class Event {
 
-    int typeOfEvent;
-    String title;
-    String description;
-    Calendar startDate;
-    int startTime;
-    Calendar endDate;
-    int endTime;
+    private int typeOfEvent;
+    private String title;
+    private String description;
+    private Calendar startDate;
+    private int startTime;
+    private Calendar endDate;
+    private int endTime;
     Group group;
     String uniqueID;
 
-    Group from;
-    List<User> usersFromGroup;
+    private Group from;
+    private List<User> usersFromGroup;
 
     public Event(String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime, Group group){
         this.title = title;
@@ -121,8 +121,7 @@ public class Event {
         if (!from.equals(event.from)) return false;
         if (!usersFromGroup.equals(event.usersFromGroup)) return false;
         if (!title.equals(event.title)) return false;
-        if (!startDate.equals(event.startDate)) return false;
-        return endDate.equals(event.endDate);
+        return startDate.equals(event.startDate) && endDate.equals(event.endDate);
 
     }
 

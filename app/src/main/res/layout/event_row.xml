@@ -44,7 +44,8 @@
         android:layout_alignParentTop="true"
         android:background="#fff"
         android:onClick="showPopup"
-        android:src="@drawable/ic_overflow" />
+        android:src="@drawable/ic_overflow"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/date"

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class EventAdapter extends ArrayAdapter<Event> {
+class EventAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> itemsArrayList;
     private final SharedPreferences sharedPreferences;
@@ -63,7 +63,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
         return rowView;
     }
 
-    public void showPopup(View v, final int pos) {
+    private void showPopup(View v, final int pos) {
         PopupMenu popup = new PopupMenu(context, v);
         MenuInflater inflater = popup.getMenuInflater();
         popup.getMenu().add(0,0,0,"Add Balance");
@@ -74,7 +74,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 SharedPreferences.Editor e = sharedPreferences.edit();
                 e.putString("eventID", itemsArrayList.get(pos).uniqueID);
                 e.putString("groupID", itemsArrayList.get(pos).getGroup().uniqueID);
-                e.commit();
+                e.apply();
                 Intent i = new Intent(getContext(), AddEventBalance.class);
                 getContext().startActivity(i);
                 return true;

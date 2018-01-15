@@ -1,6 +1,7 @@
 package com.example.wollf.togather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,16 +22,17 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    Toolbar toolbar = null;
-    AutoCompleteTextView eventTitle = null;
-    AutoCompleteTextView eventDesc = null;
-    Button fromBtn = null;
-    EditText fromDateLabel = null;
-    EditText toDateLabel = null;
-    Button toBtn = null;
-    RadioGroup groupsRadio = null;
-    Button addEventBtn = null;
-    DataBase dataBase = null;
+    private Toolbar toolbar = null;
+    private AutoCompleteTextView eventTitle = null;
+    private AutoCompleteTextView eventDesc = null;
+    private Button fromBtn = null;
+    private EditText fromDateLabel = null;
+    private EditText toDateLabel = null;
+    private Button toBtn = null;
+    private RadioGroup groupsRadio = null;
+    private Button addEventBtn = null;
+    private DataBase dataBase = null;
+    private SharedPreferences sharedPreferences = null;
     //EditText fromDateText = null, toDateText = null;
     //RadioGroup ll = null;
     //DataBase db = new DataBase();
@@ -78,6 +80,7 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
         groupsRadio = findViewById(R.id.groupsRadio);
         addEventBtn = findViewById(R.id.addEventBtn);
         dataBase = new DataBase();
+        sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
     }
 
     private void setToolbar(){
@@ -124,7 +127,7 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                 startActivity(new Intent(getApplicationContext(), TabbedActivity.class));
             }
         });
-        setRadioGroups(dataBase.getGroups());
+        setRadioGroups();
     }
 
     private Group getGroupFromRadio(int radioButtonID){
@@ -142,7 +145,9 @@ public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDa
                 radioButtonID == -1;
     }
 
-    private void setRadioGroups(List<Group> groups){
+    private void setRadioGroups(){
+        User curUser = DataBase.getUser(sharedPreferences.getString("ID",null));
+        List<Group> groups = dataBase.getUserGroups(curUser);
         int i = 0;
         for (Group x : groups) {
             RadioButton rb = new RadioButton(this);

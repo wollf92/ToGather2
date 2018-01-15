@@ -56,7 +56,7 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register" />
-        <activity android:name=".AddEventBalance"></activity>
+        <activity android:name=".AddEventBalance" />
     </application>
 
 </manifest>

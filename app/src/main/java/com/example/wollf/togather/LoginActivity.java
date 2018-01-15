@@ -3,7 +3,6 @@ package com.example.wollf.togather;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -31,7 +30,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -320,7 +318,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for(User u : db.getUsers()) {
+            for(User u : DataBase.getUsers()) {
                 if (u.getEmail().equals(mEmail)) {
                     //Account exists, return true if the password matches.
                     return u.getPassword().equals(mPassword);
@@ -336,7 +334,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success){
                 DataBase db = new DataBase();
                 User u = null;
-                for(User us : db.getUsers()) {
+                for(User us : DataBase.getUsers()) {
                     if (us.getEmail().equals(mEmail)) {
                         u = us;
                         break;
