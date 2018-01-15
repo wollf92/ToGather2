@@ -49,7 +49,9 @@ public class BalanceCalculator {
             balance.put(u,0.0);
     }
     public void addBalance(User u, double amount){
-        double curAmount = balance.getOrDefault(u, 0.0);
+        double curAmount = 0.0;
+        if(balance.containsKey(u))
+            curAmount = balance.get(u);
         curAmount += amount;
         balance.put(u,curAmount);
     }
@@ -119,6 +121,9 @@ public class BalanceCalculator {
     }
 
     public double getUserTotalPayments(User u){
-        return balance.getOrDefault(u, 0.0);
+        double amount = 0.0;
+        if(balance.containsKey(u))
+            amount = balance.get(u);
+        return amount;
     }
 }
