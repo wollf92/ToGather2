@@ -20,6 +20,12 @@ class EventAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> itemsArrayList;
     private final SharedPreferences sharedPreferences;
+    private View rowView;
+    private TextView title;
+    private TextView desc;
+    private TextView date;
+    private TextView groupName;
+    private ImageButton more;
 
     public EventAdapter(Context context, List<Event> itemsArrayList) {
 
@@ -35,14 +41,7 @@ class EventAdapter extends ArrayAdapter<Event> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View rowView = inflater.inflate(R.layout.event_row, parent, false);
-        TextView title = rowView.findViewById(R.id.title);
-        TextView desc = rowView.findViewById(R.id.desc);
-        TextView date = rowView.findViewById(R.id.date);
-        TextView groupName = rowView.findViewById(R.id.groupName);
-
-        ImageButton more = rowView.findViewById(R.id.more_event);
+        setVars(inflater, parent);
 
         title.setText(itemsArrayList.get(position).getTitle());
         desc.setText(itemsArrayList.get(position).getDescription());
@@ -51,9 +50,7 @@ class EventAdapter extends ArrayAdapter<Event> {
         String endDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getEndDate());
 
         date.setText(startDate + " - " + endDate);
-
         groupName.setText(itemsArrayList.get(position).group.groupName);
-
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +59,17 @@ class EventAdapter extends ArrayAdapter<Event> {
         });
 
         return rowView;
+    }
+
+    private void setVars(LayoutInflater inflater, ViewGroup parent) {
+        rowView = inflater.inflate(R.layout.event_row, parent, false);
+        title = rowView.findViewById(R.id.title);
+        desc = rowView.findViewById(R.id.desc);
+        date = rowView.findViewById(R.id.date);
+        groupName = rowView.findViewById(R.id.groupName);
+
+        more = rowView.findViewById(R.id.more_event);
+
     }
 
     private void showPopup(View v, final int pos) {
