@@ -67,24 +67,34 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                         curUser.getTikkie_iban_token(),
                         amount.intValue()
                 );
-                String link = null;
-                try {
-                    link = response.getString("paymentRequestUrl");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hey, I just calculated out mutual balance and you owe me €" + transaction.getAmount() +
-                                ". Would you like to pay me? You can do so using this Tikkie below.\n\n" + link);
-                sendIntent.setType("text/plain");
-                if (isAppInstalled(context))
-                    sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash
-                context.startActivity(sendIntent);
+                String link = getLink(response,"paymentRequestUrl");
+                setIntentInfo(transaction, link);
             }
         });
     }
+
+    private String getLink(JSONObject response, String getString){
+        String link = null;
+        try {
+            link = response.getString("paymentRequestUrl");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return link;
+    }
+
+    private void setIntentInfo(Transaction transaction, String link){
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,
+                "Hey, I just calculated out mutual balance and you owe me €" + transaction.getAmount() +
+                        ". Would you like to pay me? You can do so using this Tikkie below.\n\n" + link);
+        sendIntent.setType("text/plain");
+        if (isAppInstalled(context))
+            sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash
+        context.startActivity(sendIntent);
+    }
+
 
     private void setVars(LayoutInflater inflater, ViewGroup parent){
         rowView = inflater.inflate(R.layout.calculated_balance_row, parent, false);
