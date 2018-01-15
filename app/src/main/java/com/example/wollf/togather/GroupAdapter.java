@@ -77,7 +77,7 @@ public class GroupAdapter extends ArrayAdapter<Group> {
             member_send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openWhatsApp(a.getPhone());
+                    openWhatsApp(a.getPhone(), a.getName());
                 }
             });
 
@@ -93,10 +93,10 @@ public class GroupAdapter extends ArrayAdapter<Group> {
         return rowView;
     }
 
-    private void openWhatsApp(String number) {
+    private void openWhatsApp(String number, String name) {
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("text/plain");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello " + name);
         sendIntent.putExtra("jid", number + "@s.whatsapp.net"); //phone number without "+" prefix
         sendIntent.setPackage("com.whatsapp");
         context.startActivity(sendIntent);
