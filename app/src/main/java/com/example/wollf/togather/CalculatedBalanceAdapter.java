@@ -54,10 +54,7 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         if(curUser.getName().equals(transaction.getFrom()))
             rowView.findViewById(R.id.calculated_balance_pay).setVisibility(View.VISIBLE);
 
-        System.out.println(transaction.getAmount());
-        System.out.println(transaction.getAmount() % 1);
-        final Double amount = ((transaction.getAmount() - transaction.getAmount() % 1) * 100) + transaction.getAmount() % 1;
-        System.out.println(amount);
+        final Double amount = ((transaction.getAmount() - transaction.getAmount() % 1) * 100) + transaction.getAmount() % 1 * 100;
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
