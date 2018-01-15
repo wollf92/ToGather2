@@ -7,21 +7,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView
             android:id="@+id/member_name"
-            android:textSize="18dp"
-            android:text="nekaj"/>
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="nekaj"
+            android:textSize="18dp" />
 
         <ImageButton
             android:id="@+id/member_send"
-            android:layout_width="match_parent"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/whatsapp"
+            android:layout_width="30dp"
+            android:layout_height="30sp"
             android:adjustViewBounds="true"
-            android:layout_marginLeft="10dp"
-            android:layout_height="30dp" />
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/whatsapp_new" />
 
 
     </LinearLayout>

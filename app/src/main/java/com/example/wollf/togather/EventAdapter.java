@@ -3,7 +3,6 @@ package com.example.wollf.togather;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,12 +19,6 @@ class EventAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> itemsArrayList;
     private final SharedPreferences sharedPreferences;
-    private View rowView;
-    private TextView title;
-    private TextView desc;
-    private TextView date;
-    private TextView groupName;
-    private ImageButton more;
 
     public EventAdapter(Context context, List<Event> itemsArrayList) {
 
@@ -37,20 +30,29 @@ class EventAdapter extends ArrayAdapter<Event> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        setVars(inflater, parent);
+
+        View rowView = inflater.inflate(R.layout.event_row, parent, false);
+        TextView title = rowView.findViewById(R.id.title);
+        TextView desc = rowView.findViewById(R.id.desc);
+        TextView date = rowView.findViewById(R.id.date);
+        TextView groupName = rowView.findViewById(R.id.groupName);
+
+        ImageButton more = rowView.findViewById(R.id.more_event);
 
         title.setText(itemsArrayList.get(position).getTitle());
         desc.setText(itemsArrayList.get(position).getDescription());
-        Log.i("startDate", position + " " + itemsArrayList.get(position).getStartDate().toString());
-        String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
+
+        final String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
         String endDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getEndDate());
 
         date.setText(startDate + " - " + endDate);
+
         groupName.setText(itemsArrayList.get(position).group.groupName);
+
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,18 +60,16 @@ class EventAdapter extends ArrayAdapter<Event> {
             }
         });
 
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, EventPage.class);
+                i.putExtra("EVENT_ID", itemsArrayList.get(position).getUniqueID());
+                context.startActivity(i);
+            }
+        });
+
         return rowView;
-    }
-
-    private void setVars(LayoutInflater inflater, ViewGroup parent) {
-        rowView = inflater.inflate(R.layout.event_row, parent, false);
-        title = rowView.findViewById(R.id.title);
-        desc = rowView.findViewById(R.id.desc);
-        date = rowView.findViewById(R.id.date);
-        groupName = rowView.findViewById(R.id.groupName);
-
-        more = rowView.findViewById(R.id.more_event);
-
     }
 
     private void showPopup(View v, final int pos) {

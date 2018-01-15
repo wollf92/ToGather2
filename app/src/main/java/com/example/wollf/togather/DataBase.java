@@ -38,10 +38,6 @@ class DataBase {
                             DUMMYDATA.get(1),
                             DUMMYDATA.get(2),
                             DUMMYDATA.get(3)
-//                            getUsers().get(0),
-//                            getUsers().get(1)
-//                            new User("John","user1@mail.com","password1"),
-//                            new User("Adam","user3@mail.com", "password3","ABN129293299122", "0653255325")
                     )
             ),
             new Group(
@@ -133,6 +129,14 @@ class DataBase {
      */
     public static User getUser(String id){
         return DUMMYDATAMAP.get(id);
+    }
+    public static Event getEvent(String id){
+        for (Event e : Events){
+            if (e.getUniqueID().equals(id)){
+                return e;
+            }
+        }
+        return null;
     }
     public static List<User> getUsers(){
         return DUMMYDATA;
