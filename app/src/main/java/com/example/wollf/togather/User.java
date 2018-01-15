@@ -63,10 +63,10 @@ public class User implements Serializable{
         this.password = params[2];
         this.allergies = new String[]{"peanuts", "milk"};
         this.IBAN = params[3];
-        this.phone = phone;
+        this.phone = params[4];
         this.join_date = Calendar.getInstance();
-        this.tikkie_user_token = params[4];
-        this.tikkie_iban_token = params[5];
+        this.tikkie_user_token = params[5];
+        this.tikkie_iban_token = params[6];
     }
 
     public String getUniqueID() { return uniqueID; }
