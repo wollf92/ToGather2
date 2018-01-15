@@ -24,6 +24,11 @@ class GroupAdapter extends ArrayAdapter<Group> {
     private final List<Group> itemsArrayList;
     private final SharedPreferences.Editor editor;
 
+    private View rowView;
+    private TextView title;
+    private Button button;
+    private LinearLayout members_view;
+
     public GroupAdapter(Context context, List<Group> itemsArrayList) {
 
         super(context, R.layout.group_row, itemsArrayList);
@@ -37,11 +42,7 @@ class GroupAdapter extends ArrayAdapter<Group> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View rowView = inflater.inflate(R.layout.group_row, parent, false);
-        TextView title = rowView.findViewById(R.id.title);
-        Button button = rowView.findViewById(R.id.balance_button);
-        LinearLayout members_view = rowView.findViewById(R.id.group_members);
+        setVars(inflater, parent);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Log.i("groupIDSET", itemsArrayList.get(position).uniqueID);
@@ -52,6 +53,13 @@ class GroupAdapter extends ArrayAdapter<Group> {
             }
         });
 
+        addViewsForAll(inflater, parent, position);
+        title.setText(itemsArrayList.get(position).getGroupName());
+
+        return rowView;
+    }
+
+    private void addViewsForAll(LayoutInflater inflater, ViewGroup parent, int position) {
         for (final User a : itemsArrayList.get(position).getUsers()) {
             View group_member = inflater.inflate(R.layout.group_member, parent, false);
             TextView member_name = group_member.findViewById(R.id.member_name);
@@ -63,14 +71,16 @@ class GroupAdapter extends ArrayAdapter<Group> {
                     openWhatsApp(a.getPhone(), a.getName());
                 }
             });
-
             member_name.setText(a.getName());
             members_view.addView(group_member);
         }
+    }
 
-        title.setText(itemsArrayList.get(position).getGroupName());
-
-        return rowView;
+    private void setVars(LayoutInflater inflater, ViewGroup parent) {
+        rowView = inflater.inflate(R.layout.group_row, parent, false);
+        title = rowView.findViewById(R.id.title);
+        button = rowView.findViewById(R.id.balance_button);
+        members_view = rowView.findViewById(R.id.group_members);
     }
 
     private void openWhatsApp(String number, String name) {
