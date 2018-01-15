@@ -29,7 +29,6 @@ public class GroupTab extends Fragment {
     private ListView listView;
 
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -46,7 +45,6 @@ public class GroupTab extends Fragment {
      *
      * @return A new instance of fragment GroupTab.
      */
-    // TODO: Rename and change types and number of parameters
     public static GroupTab newInstance() {
         GroupTab fragment = new GroupTab();
         Bundle args = new Bundle();
@@ -85,7 +83,6 @@ public class GroupTab extends Fragment {
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -120,7 +117,6 @@ public class GroupTab extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

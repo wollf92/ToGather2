@@ -112,10 +112,8 @@ class Tikkie {
             kf = KeyFactory.getInstance("RSA");
             return kf.generatePrivate(spec);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             System.out.println(e.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             System.out.println(e.toString());
         } catch (NoSuchAlgorithmException e) {
             System.out.println(e.toString());
