@@ -87,19 +87,19 @@ public class Register extends AppCompatActivity {
             Log.d("Error", "Cant create tikkie user");
         }
         JSONArray bank_details = tikkie_user.getJSONArray("bankAccounts");
+        String user_token  = tikkie_user.getString("userToken");
         String iban_token = bank_details.getJSONObject(0).getString("bankAccountToken");
-        System.out.println(iban_token + " bank details");
         User new_user = new User(name.getText().toString(),
                 email.getText().toString(),
                 mPasswordView.getText().toString(),
                 iban.getText().toString(),
                 phone.getText().toString(),
-                tikkie_user.getString("userToken"),
+                user_token,
                 iban_token
         );
         db.addUser(new_user);
         for(User u : DataBase.getUsers()){
-            System.out.println(u.getName());
+            System.out.println(u.getName() + "\n");
         }
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
