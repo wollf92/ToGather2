@@ -55,18 +55,18 @@ public class User implements Serializable{
         this.join_date = Calendar.getInstance();
         groups = new HashMap<>();
     }
-
-    public User(String name, String email, String password,String iban, String phone, String tikkie_user, String tikkie_iban){
+    //String name, String email, String password, String iban, String phone, String tikkie_user, String tikkie_iban
+    public User(String...params){
         this.uniqueID = UUID.randomUUID().toString();
-        this.name = name;
-        this.email = email;
-        this.password = password;
+        this.name = params[0];
+        this.email = params[1];
+        this.password = params[2];
         this.allergies = new String[]{"peanuts", "milk"};
-        this.IBAN = iban;
+        this.IBAN = params[3];
         this.phone = phone;
         this.join_date = Calendar.getInstance();
-        this.tikkie_user_token = tikkie_user;
-        this.tikkie_iban_token = tikkie_iban;
+        this.tikkie_user_token = params[4];
+        this.tikkie_iban_token = params[5];
     }
 
     public String getUniqueID() { return uniqueID; }

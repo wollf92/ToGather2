@@ -22,16 +22,16 @@ class Event {
 
     private Group from;
     private List<User> usersFromGroup;
-
-    public Event(String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime, Group group){
-        this.title = title;
-        this.description = desc;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
+    //String title, String desc, Calendar startDate, Calendar endDate, int startTime, int endTime, Group group
+    public Event(Object...params){
+        this.title = (String)params[0];
+        this.description = (String)params[1];
+        this.startDate = (Calendar)params[2];
+        this.endDate = (Calendar)params[3];
+        this.startTime = (Integer)params[4];
+        this.endTime = (Integer)params[5];
         this.uniqueID = UUID.randomUUID().toString();
-        this.group = group;
+        this.group = (Group)params[6];
         this.usersFromGroup = group.getUsers();
     }
 
