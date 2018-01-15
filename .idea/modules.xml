@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://F:\Programming\Android\ToGather\ToGather\SDE.iml" filepath="F:\Programming\Android\ToGather\ToGather\SDE.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ToGather.iml" filepath="$PROJECT_DIR$/ToGather.iml" />
       <module fileurl="file://C:\Users\Mark\Desktop\RADBOUD\SDE\ToGather.iml" filepath="C:\Users\Mark\Desktop\RADBOUD\SDE\ToGather.iml" />
       <module fileurl="file://E:\Android\Projects\ToGather2\ToGather.iml" filepath="E:\Android\Projects\ToGather2\ToGather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ToGather2.iml" filepath="$PROJECT_DIR$/ToGather2.iml" />
       <module fileurl="file://F:\Programming\Android\ToGather\ToGather\ToGather2.iml" filepath="F:\Programming\Android\ToGather\ToGather\ToGather2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

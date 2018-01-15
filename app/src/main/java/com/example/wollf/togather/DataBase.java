@@ -1,28 +1,18 @@
 package com.example.wollf.togather;
 
-/**
- * Created by wollf on 17-10-2017.
- */
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.ShareActionProvider;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class for talking with the specific database connection, to set-up in the future.
  */
-public class DataBase {
-    String gpps;
+class DataBase {
+    private String gpps;
     public DataBase(){ gpps = null;
     }
     public DataBase(String groupPayments){
@@ -78,15 +68,15 @@ public class DataBase {
             new Group(
                     "Classmates4",
                     Arrays.asList(
-                            new User("John","user1@mail.com","password1"),
-                            new User("Karin","user2@mail.com","password2")
+                            DUMMYDATA.get(0),
+                            DUMMYDATA.get(2)
                     )
             ),
             new Group(
                     "Classmates5",
                     Arrays.asList(
-                            new User("John","user1@mail.com","password1"),
-                            new User("Karin","user2@mail.com","password2")
+                            DUMMYDATA.get(0),
+                            DUMMYDATA.get(2)
                     )
             )
     ));
@@ -165,7 +155,7 @@ public class DataBase {
     }
 
 
-    static Calendar getDate(int year, int month, int day){
+    private static Calendar getDate(int year, int month, int day){
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, day);
         return cal;
@@ -208,7 +198,7 @@ public class DataBase {
                 String[] groupPayments = gp.split(";");
                 if (groupPayments.length == 3) {
                     Group group = getGroup(groupPayments[0]);
-                    if (group != null && group.uniqueID == g.uniqueID) {
+                    if (group != null && Objects.equals(group.uniqueID, g.uniqueID)) {
                         User u = getUser(groupPayments[1]);
                         bc.addBalance(u, Double.parseDouble(groupPayments[2]));
                     }

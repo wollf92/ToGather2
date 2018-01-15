@@ -4,22 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.wollf.togather.MainActivity">
     <item
-        android:id="@+id/edit_event"
         android:orderInCategory="100"
         android:title="Edit"
         app:showAsAction="never" />
     <item
-        android:id="@+id/mark_as_fav_event"
         android:orderInCategory="100"
         android:title="Mark as favorite"
         app:showAsAction="never" />
     <item
-        android:id="@+id/open_event"
         android:orderInCategory="100"
         android:title="Open"
         app:showAsAction="never" />
     <item
-        android:id="@+id/delete_event"
         android:orderInCategory="100"
         android:title="Leave/delete"
         app:showAsAction="never" />

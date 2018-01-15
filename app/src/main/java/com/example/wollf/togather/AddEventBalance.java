@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class AddEventBalance extends AppCompatActivity {
-    TextView amount;
-    SharedPreferences sharedPreferences;
+    private TextView amount;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
@@ -28,7 +28,7 @@ public class AddEventBalance extends AppCompatActivity {
                 Log.i("onbuttonclick: ", groupString + " " + userString + " " + whatsThere);
                 SharedPreferences.Editor e = sharedPreferences.edit();
                 e.putString("groupPayments", whatsThere + (whatsThere == null ? "" : ",") + groupString+";"+userString+";"+amount.getText());
-                e.commit();
+                e.apply();
                 Log.i("commited:", sharedPreferences.getString("groupPayments","empty"));
                 finish();
             }

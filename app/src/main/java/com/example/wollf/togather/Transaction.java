@@ -8,7 +8,7 @@ import java.util.Locale;
  * Created by wollf on 17-12-2017.
  */
 
-public class Transaction {
+class Transaction {
     private String from, to;
     private double amount;
     public Transaction(User from, double amount, User to){

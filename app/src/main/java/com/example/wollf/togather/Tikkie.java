@@ -40,14 +40,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * Created by Mark on 19. 12. 2017.
  */
 
-public class Tikkie {
+class Tikkie {
 
     private String platform_id = "d06da34d-fffb-4b04-a28b-de3a8def4ea6";
     private String api_key = "a6hf4T8ZIylfOOqjQxC14yOB5AvZ15uO";
     private String api_url = "https://api-sandbox.abnamro.com";
     private String access_token = null;
 
-    Context ctx;
+    private Context ctx;
 
     public Tikkie(Context c) {
         this.ctx = c;
@@ -72,7 +72,7 @@ public class Tikkie {
         return json;
     }
 
-    public String get_access_token() {
+    private String get_access_token() {
 
         Uri.Builder builder = new Uri.Builder()
                 .appendQueryParameter("client_assertion_type", "urn:ietf:params:oauth:client-assertion-type:jwt-bearer")
@@ -82,7 +82,7 @@ public class Tikkie {
 
         Requests r = new Requests(this);
 
-        JSONObject res = null;
+        JSONObject res;
         try {
              res = r.execute("https://api-sandbox.abnamro.com/v1/oauth/token",
                                          "POST",
@@ -108,7 +108,7 @@ public class Tikkie {
             byte[] keyBytes = IOUtils.toByteArray(buf);
             PKCS8EncodedKeySpec spec =
                     new PKCS8EncodedKeySpec(keyBytes);
-            KeyFactory kf = null;
+            KeyFactory kf;
             kf = KeyFactory.getInstance("RSA");
             return kf.generatePrivate(spec);
         } catch (FileNotFoundException e) {
@@ -125,13 +125,13 @@ public class Tikkie {
         return null;
     }
 
-    public String get_json_web_token() {
+    private String get_json_web_token() {
 
         Calendar date = Calendar.getInstance();
         long t= date.getTimeInMillis();
         Date oneMinute = new Date(t + 60000);
         Date now = new Date(t - 60000);
-        String jws = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(this.api_key)
                 .setHeaderParam("typ", "JWT")
                 .setExpiration(oneMinute)
@@ -140,7 +140,6 @@ public class Tikkie {
                 .setAudience("https://auth-sandbox.abnamro.com/oauth/token")
                 .signWith(SignatureAlgorithm.RS256, this.get_private_key())
                 .compact();
-        return jws;
     }
 
     public JSONObject add_user(String name, String phone_number, String iban){
@@ -152,7 +151,7 @@ public class Tikkie {
         data.put("iban", iban);
         data.put("bankAccountLabel", "Personal account");
         JSONObject user_json = create_json(data);
-        JSONObject res = null;
+        JSONObject res;
         try {
             res = r.execute("https://api-sandbox.abnamro.com/v1/tikkie/platforms/" + platform_id + "/users",
                     "POST",
@@ -169,16 +168,16 @@ public class Tikkie {
     }
 
     public JSONObject get_payment_request(String user_token, String bank_account_token,
-                                          int amount /* in cents */, String desc){
+                                          int amount /* in cents */){
         Requests r = new Requests(this);
 
         Map<String, Object> data = new HashMap<>();
         data.put("amountInCents", amount);
         data.put("currency", "EUR");
-        data.put("description", desc);
+        data.put("description", "Payment from togather");
         JSONObject payment_request_json = create_json(data);
 
-        JSONObject res = null;
+        JSONObject res;
         try {
             res = r.execute("https://api-sandbox.abnamro.com/v1/tikkie/platforms/" +
                             platform_id + "/users/" + user_token +"/bankaccounts/" +
@@ -198,8 +197,8 @@ public class Tikkie {
 }
 
 class Requests extends AsyncTask<String, Void, JSONObject> {
-    Exception mException = null;
-    Tikkie tikkie;
+    private Exception mException = null;
+    private Tikkie tikkie;
 
     Requests(Tikkie t){
         this.tikkie = t;
@@ -224,7 +223,7 @@ class Requests extends AsyncTask<String, Void, JSONObject> {
         urlString.append(params[0]);
 
         HttpURLConnection urlConnection = null;
-        URL url = null;
+        URL url;
         JSONObject object = null;
         InputStream inStream = null;
         try {
@@ -261,15 +260,15 @@ class Requests extends AsyncTask<String, Void, JSONObject> {
             }
 
             BufferedReader bReader = new BufferedReader(new InputStreamReader(inStream));
-            String temp, response = "";
+            String temp;StringBuilder response = new StringBuilder();
             while ((temp = bReader.readLine()) != null){
-                response += temp;
+                response.append(temp);
             }
 
             bReader.close();
             inStream.close();
             urlConnection.disconnect();
-            object = (JSONObject) new JSONTokener(response).nextValue();
+            object = (JSONObject) new JSONTokener(response.toString()).nextValue();
             object.put("response_code", responseCode);
         } catch (Exception e) {
             this.mException = e;

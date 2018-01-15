@@ -7,20 +7,19 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AddGroup extends AppCompatActivity {
 
-    DataBase db = new DataBase();
+    private DataBase db = new DataBase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +32,18 @@ public class AddGroup extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         SharedPreferences prefs = this.getSharedPreferences("user_data", Context.MODE_PRIVATE);
-        final User curUser = db.getUser(prefs.getString("ID",null));
+        final User curUser = DataBase.getUser(prefs.getString("ID",null));
 
         LinearLayout ll = findViewById(R.id.checkbox_list);
         Button addBtn = findViewById(R.id.addGroupBtn);
         final EditText groupNameText = findViewById(R.id.group_name);
 
-        List<User> users = db.getUsers();
+        List<User> users = DataBase.getUsers();
 
         final ArrayList<CheckBox> cbList = new ArrayList<CheckBox>();
 
         for (User x : users) {
-            if (x.getUniqueID() != curUser.getUniqueID()){
+            if (!Objects.equals(x.getUniqueID(), curUser.getUniqueID())){
                 CheckBox cb = new CheckBox(getApplicationContext());
                 cb.setTag(x);
                 cb.setText(Html.fromHtml("<big>" + x.getName() + "</big>"));

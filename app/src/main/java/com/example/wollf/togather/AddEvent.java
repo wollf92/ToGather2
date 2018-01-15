@@ -20,9 +20,10 @@ import java.util.List;
 public class AddEvent extends AppCompatActivity implements
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    EditText fromDateText = null, toDateText = null;
+    private EditText fromDateText = null;
+    private EditText toDateText = null;
     RadioGroup ll = null;
-    DataBase db = new DataBase();
+    private DataBase db = new DataBase();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
