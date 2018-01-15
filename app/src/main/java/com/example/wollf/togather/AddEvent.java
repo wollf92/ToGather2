@@ -1,6 +1,7 @@
 package com.example.wollf.togather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -50,6 +51,8 @@ public class AddEvent extends AppCompatActivity implements
         toDateText = findViewById(R.id.toDateLabel);
         fromDateText = findViewById(R.id.fromDateLabel);
         final RadioGroup ll = findViewById(R.id.groupsRadio);
+
+        SharedPreferences editor = this.getSharedPreferences("user_data", MODE_PRIVATE);
 
 
         Calendar now = Calendar.getInstance();
@@ -139,7 +142,9 @@ public class AddEvent extends AppCompatActivity implements
             }
         });
 
-        List<Group> groups = db.getGroups();
+        String id = editor.getString("ID", null);
+        User u = DataBase.getUser(id);
+        List<Group> groups = db.getUserGroups(u);
         int i = 0;
         for (Group x : groups) {
             RadioButton rb = new RadioButton(this);

@@ -16,10 +16,12 @@
 
         <ImageButton
             android:id="@+id/member_send"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:background="@android:color/transparent"
             android:src="@mipmap/whatsapp"
-            android:layout_height="40dp" />
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="10dp"
+            android:layout_height="30dp" />
 
 
     </LinearLayout>

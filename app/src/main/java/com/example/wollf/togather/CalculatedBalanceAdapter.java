@@ -80,7 +80,6 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                 if (isAppInstalled(context, "com.whatsapp"))
                     sendIntent.setPackage("com.whatsapp"); // If you dont have whatsapp there is crash
                 context.startActivity(sendIntent);
-                // Log.d("access", tikkie.get_access_token());
             }
         });
 

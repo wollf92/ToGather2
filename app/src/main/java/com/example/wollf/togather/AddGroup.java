@@ -44,7 +44,7 @@ public class AddGroup extends AppCompatActivity {
         final ArrayList<CheckBox> cbList = new ArrayList<CheckBox>();
 
         for (User x : users) {
-            if (x.getUniqueID() != curUser.getUniqueID()){
+            if (!x.getUniqueID().equals(curUser.getUniqueID())){
                 CheckBox cb = new CheckBox(getApplicationContext());
                 cb.setTag(x);
                 cb.setText(Html.fromHtml("<big>" + x.getName() + "</big>"));
