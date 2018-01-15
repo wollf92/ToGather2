@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -17,12 +20,20 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddEvent extends AppCompatActivity implements
-        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-
-    EditText fromDateText = null, toDateText = null;
-    RadioGroup ll = null;
-    DataBase db = new DataBase();
+public class AddEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+    Toolbar toolbar = null;
+    AutoCompleteTextView eventTitle = null;
+    AutoCompleteTextView eventDesc = null;
+    Button fromBtn = null;
+    EditText fromDateLabel = null;
+    EditText toDateLabel = null;
+    Button toBtn = null;
+    RadioGroup groupsRadio = null;
+    Button addEventBtn = null;
+    DataBase dataBase = null;
+    //EditText fromDateText = null, toDateText = null;
+    //RadioGroup ll = null;
+    //DataBase db = new DataBase();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -36,22 +47,7 @@ public class AddEvent extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        final EditText titleInput = findViewById(R.id.event_title);
-        final EditText descInput = findViewById(R.id.event_desc);
-        final Button fromDateBtn = findViewById(R.id.fromBtn);
-        Button toDateBtn = findViewById(R.id.toBtn);
-        Button addEventBtn = findViewById(R.id.addEventBtn);
-        toDateText = findViewById(R.id.toDateLabel);
-        fromDateText = findViewById(R.id.fromDateLabel);
-        final RadioGroup ll = findViewById(R.id.groupsRadio);
-
-
+        setVars();
         Calendar now = Calendar.getInstance();
         final DatePickerDialog dpd = DatePickerDialog.newInstance(
                 this,
@@ -59,7 +55,6 @@ public class AddEvent extends AppCompatActivity implements
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-
         final TimePickerDialog tpd = TimePickerDialog.newInstance(
                 this,
                 now.get(Calendar.HOUR),
@@ -67,104 +62,135 @@ public class AddEvent extends AppCompatActivity implements
                 now.get(Calendar.SECOND),
                 true
         );
+        setOnFocusChangeListener(fromDateLabel, tpd, dpd, true);
+        setOnFocusChangeListener(toDateLabel, tpd, dpd, false);
+        setOnClickListener();
+    }
 
-        fromDateText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+    private void setVars(){
+        setToolbar();
+        eventTitle = findViewById(R.id.event_title);
+        eventDesc = findViewById(R.id.event_desc);
+        fromBtn = findViewById(R.id.fromBtn);
+        fromDateLabel = findViewById(R.id.fromDateLabel);
+        toDateLabel = findViewById(R.id.toDateLabel);
+        toBtn = findViewById(R.id.toBtn);
+        groupsRadio = findViewById(R.id.groupsRadio);
+        addEventBtn = findViewById(R.id.addEventBtn);
+        dataBase = new DataBase();
+    }
+
+    private void setToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    public void setOnFocusChangeListener(EditText text, final TimePickerDialog tpd, final DatePickerDialog dpd, final boolean isFrom){
+        text.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus){
-                    tpd.show(getFragmentManager(), "fromTime");
-                    dpd.show(getFragmentManager(), "fromDate");
+            public void onFocusChange(View view, boolean hasFocus){
+                if(hasFocus){
+                    tpd.show(getFragmentManager(), (isFrom ? "from" : "to") + "Time");
+                    dpd.show(getFragmentManager(), (isFrom ? "from" : "to") + "Date");
                 }
             }
         });
+    }
 
-        toDateText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus){
-                    tpd.show(getFragmentManager(), "toTime");
-                    dpd.show(getFragmentManager(), "toDate");
-                }
-            }
-        });
-
+    public void setOnClickListener(){
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                int radioButtonID = ll.getCheckedRadioButtonId();
-
-                if(titleInput.getText().toString().isEmpty() ||
-                        descInput.getText().toString().isEmpty() ||
-                        fromDateText.getText().toString().isEmpty() ||
-                        toDateText.getText().toString().isEmpty() ||
-                        radioButtonID == -1){
-                    // Data is missing
+                int radioButtonID = groupsRadio.getCheckedRadioButtonId();
+                if(isInvalidEvent(radioButtonID)){
                     Toast.makeText(getApplicationContext(), "Data is missing try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                Calendar calFrom = Calendar.getInstance();
-                Calendar calTo = Calendar.getInstance();
-                String[] fromString = fromDateText.getText().toString().split(" ");
-                String[] fromDate = fromString[0].split("/");
-                String[] fromTime = fromString[1].split(":");
-                calFrom.set(Integer.parseInt(fromDate[0]),
-                        Integer.parseInt(fromDate[1]),
-                        Integer.parseInt(fromDate[2]));
-
-                String[] toString = toDateText.getText().toString().split(" ");
-                String[] toDate = toString[0].split("/");
-                String[] toTime = toString[1].split(":");
-                calTo.set(Integer.parseInt(toDate[0]),
-                        Integer.parseInt(toDate[1]),
-                        Integer.parseInt(toDate[2]));
-
-                View radioButton = ll.findViewById(radioButtonID);
-                int idx = ll.indexOfChild(radioButton);
-                RadioButton r = (RadioButton)  ll.getChildAt(idx);
-                Group chosenGroup = (Group) r.getTag();
-
+                Calendar calFrom = getFromCalendar(fromDateLabel);
+                Calendar calTo = getToCalendar(toDateLabel);
+                Group chosenGroup = getGroupFromRadio(radioButtonID);
                 Event newEvent = new Event(
-                        titleInput.getText().toString(),
-                        descInput.getText().toString(),
+                        eventTitle.getText().toString(),
+                        eventDesc.getText().toString(),
                         calFrom,
                         calTo,
                         200,
                         300,
                         chosenGroup
                 );
-                db.addEvent(newEvent);
-                Intent i = new Intent(getApplicationContext(), TabbedActivity.class);
-                startActivity(i);
+                dataBase.addEvent(newEvent);
+                startActivity(new Intent(getApplicationContext(), TabbedActivity.class));
             }
         });
+        setRadioGroups(dataBase.getGroups());
+    }
 
-        List<Group> groups = db.getGroups();
+    private Group getGroupFromRadio(int radioButtonID){
+        View radioButton = groupsRadio.findViewById(radioButtonID);
+        int idx = groupsRadio.indexOfChild(radioButton);
+        RadioButton r = (RadioButton)  groupsRadio.getChildAt(idx);
+        return (Group) r.getTag();
+    }
+
+    private boolean isInvalidEvent(int radioButtonID){
+        return  eventTitle.getText().toString().isEmpty() ||
+                eventDesc.getText().toString().isEmpty() ||
+                fromDateLabel.getText().toString().isEmpty() ||
+                toDateLabel.getText().toString().isEmpty() ||
+                radioButtonID == -1;
+    }
+
+    private void setRadioGroups(List<Group> groups){
         int i = 0;
         for (Group x : groups) {
             RadioButton rb = new RadioButton(this);
             rb.setTag(x);
             rb.setId(i++);
             rb.setText(x.getGroupName());
-            ll.addView(rb);
+            groupsRadio.addView(rb);
         }
+    }
+
+    private Calendar getFromCalendar(EditText fromDateText){
+        Calendar calFrom = Calendar.getInstance();
+        String[] fromString = fromDateText.getText().toString().split(" ");
+        String[] fromDate = fromString[0].split("/");
+        String[] fromTime = fromString[1].split(":");
+        calFrom.set(Integer.parseInt(fromDate[0]),
+                Integer.parseInt(fromDate[1]),
+                Integer.parseInt(fromDate[2]));
+        Log.i("fromDate",fromDateText.getText().toString() + "\t" + fromDate[0] + " " + fromDate[1] + " " + fromDate[2]);
+        return calFrom;
+    }
+
+    private Calendar getToCalendar(EditText toDateText){
+        Calendar calTo = Calendar.getInstance();
+        String[] toString = toDateText.getText().toString().split(" ");
+        String[] toDate = toString[0].split("/");
+        String[] toTime = toString[1].split(":");
+        calTo.set(Integer.parseInt(toDate[0]),
+                Integer.parseInt(toDate[1]),
+                Integer.parseInt(toDate[2]));
+        return calTo;
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         if (view.getTag().equals("fromDate")){
-            fromDateText.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year + " ");
+            fromDateLabel.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year + " ");
         } else {
-            toDateText.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year + " ");
+            toDateLabel.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year + " ");
         }
     }
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         if (view.getTag().equals("fromTime")) {
-            fromDateText.append(hourOfDay + ":" + minute);
+            fromDateLabel.append(hourOfDay + ":" + minute);
         } else {
-            toDateText.append(hourOfDay + ":" + minute);
+            toDateLabel.append(hourOfDay + ":" + minute);
         }
     }
 }

@@ -9,7 +9,6 @@
     android:paddingTop="@dimen/appbar_padding_top"
     tools:context="com.example.wollf.togather.ProfileTab">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ImageView
         android:id="@+id/imageView3"

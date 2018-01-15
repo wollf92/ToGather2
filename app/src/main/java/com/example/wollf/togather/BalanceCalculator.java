@@ -69,7 +69,6 @@ public class BalanceCalculator {
         }
         for(Transaction t : minimumTransactions){
             System.out.printf("User: %s, pays %.2f to User: %s\n",t.getFrom(), t.getAmount(), t.getTo());
-            //System.out.printf(t.getFrom() + " " + t.getAmount() + " " + t.getTo());
         }
         return minimumTransactions;
     }
@@ -82,21 +81,8 @@ public class BalanceCalculator {
         double min = Math.min(-mxDebit.getValue(),mxCredit.getValue());
         calculatedBalance.put(mxCredit.getKey(),mxCredit.getValue() - min);
         calculatedBalance.put(mxDebit.getKey(), mxDebit.getValue() + min);
-        //addToTransActions(mxDebit.getKey(), min, mxCredit.getKey(), minimumTransactions);
         minimumTransactions.add(new Transaction(mxDebit.getKey(), min, mxCredit.getKey()));
         recursiveCalculate(calculatedBalance, minimumTransactions);
-    }
-
-    private void addToTransActions(User from, double min, User to, List<Transaction> transactions) {
-        for(Transaction t : transactions){
-            Log.i("infoOfTransaction", from.getName() + "=?=" + t.getFrom() + "\t" + to.getName() + "=?=" + t.getTo());
-            if(t.getFrom().equals(from.getName()) && t.getTo().equals(to.getName())){
-                Log.i("containsSame", ""+min);
-                t.addMount(min);
-                return;
-            }
-        }
-        transactions.add(new Transaction(from, min, to));
     }
 
     private Map.Entry<User,Double> getMax(Map<User, Double> calculatedBalance) {

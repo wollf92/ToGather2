@@ -69,7 +69,6 @@ public class GroupAdapter extends ArrayAdapter<Group> {
         });
 
         for (final User a : itemsArrayList.get(position).getUsers()) {
-            //users += " • " + a.getName() + " " + btnTag + "\n";
             View group_member = inflater.inflate(R.layout.group_member, parent, false);
             TextView member_name = group_member.findViewById(R.id.member_name);
             Button member_send = group_member.findViewById(R.id.member_send);
@@ -88,7 +87,6 @@ public class GroupAdapter extends ArrayAdapter<Group> {
         }
 
         title.setText(itemsArrayList.get(position).getGroupName());
-        //desc.setText(users);
 
         return rowView;
     }

@@ -50,7 +50,6 @@ public class User implements Serializable{
         this.name = name;
         this.email = email;
         this.password = password;
-        // TODO: to be initialized in contructor
         this.IBAN = "NL23RABO34";
         this.phone = "4083204";
         this.tikkie_user_token = "2099e755-ab32-4e80-b6fc-b870155b12de";

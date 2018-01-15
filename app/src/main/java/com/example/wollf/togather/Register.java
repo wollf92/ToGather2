@@ -95,13 +95,6 @@ public class Register extends AppCompatActivity {
 
     private void register() throws JSONException {
         DataBase db = new DataBase();
-        /*Tikkie tikkie = new Tikkie(this);
-        JSONObject tikkie_user = tikkie.add_user(name.getText().toString(),
-                phone.getText().toString(),
-                iban.getText().toString());
-        if (!tikkie_user.getString("response_code").equals("201")){
-            Log.d("Error", "Cant create tikkie user");
-        }*/
         User new_user = new User(name.getText().toString(),
                 email.getText().toString(),
                 mPasswordView.getText().toString(),
@@ -195,22 +188,18 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
     private boolean isIBANValid(String iban) {
-        //TODO: Replace this with your own logic
         return iban.length() == 18;
     }
 
     private boolean isPhoneNumberValid(String number) {
-        //TODO: Replace this with your own logic
         return number.substring(0,2).equals("06");
     }
 
