@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by wollf on 17-12-2017.
@@ -45,7 +47,7 @@ public class GroupBalanceAdapter extends ArrayAdapter<User> {
         Group curGroup = db.getGroup(sp.getString("groupID", null));
         double total = db.getCalculatorForGroup(curGroup).getUserTotalPayments(curUser);
         user.setText(curUser.getName());
-        balance.setText("€"+new DecimalFormat(".##").format(total));
+        balance.setText("€"+new DecimalFormat(".##", new DecimalFormatSymbols(Locale.US)).format(total));
 
         return rowView;
     }
