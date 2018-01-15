@@ -199,14 +199,14 @@ public class DataBase {
             }
         }
         for(User u : g.getUsers()){
-            bc.addBalance(u,0);
+            bc.addUser(u);
         }
         Log.i("contextualv1", gpps == null ? "any" : gpps);
         if(gpps != null){
             String groupPaymentsMore = gpps;
             String[] payments = groupPaymentsMore.split(",");
             for(String gp : payments) {
-                String[] groupPayments = gp.split("\\|");
+                String[] groupPayments = gp.split(";");
                 Log.i("grouPayments", Arrays.toString(groupPayments));
                 if (groupPayments.length == 3) {
                     Group group = getGroup(groupPayments[0]);
