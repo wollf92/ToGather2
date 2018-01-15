@@ -107,14 +107,11 @@
             android:paddingTop="10dp"
             tools:layout_editor_absoluteY="296dp" />
 
-    <TextView
-        android:id="@+id/event_group_show"
-        android:layout_width="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_height="wrap_content"
-        android:text="event_group_show"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="335dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_member_names"
+            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 
