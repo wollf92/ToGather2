@@ -2,18 +2,21 @@ package com.example.wollf.togather;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class EventPage extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,10 @@ public class EventPage extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         DataBase db = new DataBase();
+        final SharedPreferences sharedPreferences;
+        sharedPreferences = this.getSharedPreferences("user_data",Context.MODE_PRIVATE);
         String s = getIntent().getStringExtra("EVENT_ID");
-        Event e = db.getEvent(s);
+        final Event e = db.getEvent(s);
 
         setTitle(e.getTitle());
 
@@ -33,6 +38,7 @@ public class EventPage extends AppCompatActivity {
         TextView desc = findViewById(R.id.event_desc_show);
         TextView starts = findViewById(R.id.event_from_show);
         TextView ends = findViewById(R.id.event_to_show);
+        Button balance_btn = findViewById(R.id.add_balance_btn);
 
         String startDate = String.format("%1$td.%1$tm.%1$tY", e.getStartDate());
         String endDate = String.format("%1$td.%1$tm.%1$tY", e.getEndDate());
@@ -48,6 +54,18 @@ public class EventPage extends AppCompatActivity {
         starts.setText(startDate + " " + start_time);
         ends.setText(endDate + " " + end_time);
 
+        balance_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("eventID", e.getUniqueID());
+                editor.putString("groupID", e.getGroup().uniqueID);
+                editor.apply();
+                Intent i = new Intent(EventPage.this, AddEventBalance.class);
+                EventPage.this.startActivity(i);
+            }
+        });
+
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout members_view = findViewById(R.id.event_member_names);
@@ -62,7 +80,7 @@ public class EventPage extends AppCompatActivity {
             member_send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openWhatsApp(u.getPhone(), u.getName());
+                    openWhatsApp(u.getPhone().substring(1), u.getName());
                 }
             });
             member_name.setText(u.getName());

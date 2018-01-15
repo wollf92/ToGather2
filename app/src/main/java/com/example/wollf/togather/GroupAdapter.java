@@ -68,7 +68,7 @@ class GroupAdapter extends ArrayAdapter<Group> {
             member_send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openWhatsApp(a.getPhone(), a.getName());
+                    openWhatsApp(a.getPhone().substring(1), a.getName());
                 }
             });
             member_name.setText(a.getName());

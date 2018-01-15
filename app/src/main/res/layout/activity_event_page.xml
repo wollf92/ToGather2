@@ -113,6 +113,12 @@
             android:id="@+id/event_member_names"
             android:orientation="vertical"></LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add balance"
+            android:id="@+id/add_balance_btn"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -81,20 +81,25 @@ public class Register extends AppCompatActivity {
     private void register() throws JSONException {
         DataBase db = new DataBase();
         Tikkie tikkie = new Tikkie(this);
+
+        String phone_number = phone.getText().toString();
+        String phone_number_user = "+31" + phone.getText().toString().substring(1);
+
         JSONObject tikkie_user = tikkie.add_user(name.getText().toString(),
-                phone.getText().toString(),
-                iban.getText().toString());
+                phone_number,
+                iban.getText().toString().toUpperCase());
         if (!tikkie_user.getString("response_code").equals("201")){
             Log.d("Error", "Cant create tikkie user");
         }
+        System.out.println(tikkie_user);
         JSONArray bank_details = tikkie_user.getJSONArray("bankAccounts");
         String user_token  = tikkie_user.getString("userToken");
         String iban_token = bank_details.getJSONObject(0).getString("bankAccountToken");
         User new_user = new User(name.getText().toString(),
                 email.getText().toString(),
                 mPasswordView.getText().toString(),
-                iban.getText().toString(),
-                phone.getText().toString(),
+                iban.getText().toString().toUpperCase(),
+                phone_number_user,
                 user_token,
                 iban_token
         );
