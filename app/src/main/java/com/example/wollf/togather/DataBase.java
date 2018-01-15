@@ -194,6 +194,9 @@ public class DataBase {
                 }
             }
         }
+        for(User u : g.getUsers()){
+            bc.addBalance(u,0);
+        }
         Log.i("contextualv1", gpps == null ? "any" : gpps);
         if(gpps != null){
             String groupPaymentsMore = gpps;

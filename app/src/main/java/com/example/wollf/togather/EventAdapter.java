@@ -71,9 +71,10 @@ public class EventAdapter extends ArrayAdapter<Event> {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 //ADD EVENT TO SHARED
-                sharedPreferences.edit().putString("eventID", itemsArrayList.get(pos).uniqueID);
-                sharedPreferences.edit().putString("groupID", itemsArrayList.get(pos).getGroup().uniqueID);
-                sharedPreferences.edit().commit();
+                SharedPreferences.Editor e = sharedPreferences.edit();
+                e.putString("eventID", itemsArrayList.get(pos).uniqueID);
+                e.putString("groupID", itemsArrayList.get(pos).getGroup().uniqueID);
+                e.commit();
                 Intent i = new Intent(getContext(), AddEventBalance.class);
                 getContext().startActivity(i);
                 return true;

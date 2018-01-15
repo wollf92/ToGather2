@@ -46,7 +46,7 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         TextView total = rowView.findViewById(R.id.calculated_balance_total);
         Button btn = rowView.findViewById(R.id.calculated_balance_pay);
 
-        DataBase db = new DataBase();
+        DataBase db = new DataBase(sp.getString("groupBalance",null));
         User curUser = db.getUser(sp.getString("ID",null));
         final Transaction transaction = itemsArrayList.get(position);
         from.setText(transaction.getFrom());
