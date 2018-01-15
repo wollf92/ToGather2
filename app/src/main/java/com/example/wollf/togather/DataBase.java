@@ -30,13 +30,13 @@ public class DataBase {
     }
 
     private static List<User> DUMMYDATA = new ArrayList<User>(Arrays.asList(
-            new User("Michael de Kaste","user1@mail.com","password1", "NL61RABO0107981491", " 0612340128",
+            new User("Michael de Kaste","user1@mail.com","password1", "NL61RABO0107981491", "31618388915",
                     "d3d1506b-7ddf-4f38-93ae-7ccb872e3609", "af7d203f-03f4-4dfd-8faa-9fb814933490"),
-            new User("Matea","user2@mail.com","password2", "INGB1234567809", "0625412587",
+            new User("Matea","user2@mail.com","password2", "INGB1234567809", "385925033629",
                     "6725ce28-38c8-4c4b-9c7d-bc94ce3eda93", "75d588c0-a9f9-4153-94f6-ad699066606c"),
-            new User("Michael Zhang","user3@mail.com", "password3","ABN1292932992122", "0653255325",
+            new User("Michael Zhang","user3@mail.com", "password3","ABN1292932992122", "31633463822",
                     "dc5df003-30d8-4c17-918d-77e448c9766f", "18aa4a81-06e9-40d5-94c3-5620a87a2d63"),
-            new User("Pim","user4@mail.com", "password4","NL20RABO0s65404548","0687104545",
+            new User("Pim","user4@mail.com", "password4","NL20RABO0s65404548","31683238852",
                     "7adf40d9-c729-4f68-a4fb-b2d7f69d61fc", "14f52f93-307f-4765-a1a1-db5a72a08d5b")
     ));
 
@@ -113,13 +113,16 @@ public class DataBase {
         balance1.put(g.getUsers().get(0), new ArrayList<Double>());
         balance1.get(g.getUsers().get(0)).add(10.0);
         balance1.get(g.getUsers().get(0)).add(3.0);
+        balance1.get(g.getUsers().get(0)).add(3.0);
         balance1.put(g.getUsers().get(1), new ArrayList<Double>());
         balance1.get(g.getUsers().get(1)).add(2.0);
+        balance1.get(g.getUsers().get(1)).add(4.0);
         balance1.get(g.getUsers().get(1)).add(4.0);
         balance1.put(g.getUsers().get(2), new ArrayList<Double>());
         balance1.get(g.getUsers().get(2)).add(4.0);
         balance1.put(g.getUsers().get(3), new ArrayList<Double>());
         balance1.get(g.getUsers().get(3)).add(5.0);
+        balance1.get(g.getUsers().get(3)).add(2.0);
 
         put(g, balance1);
     }};
@@ -152,6 +155,7 @@ public class DataBase {
     }
     public void addUser(User u){
         DUMMYDATA.add(u);
+        DUMMYDATAMAP = toMap(DUMMYDATA);
     }
     public void addEvent(Event e) {
         Events.add(e);

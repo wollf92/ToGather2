@@ -47,23 +47,24 @@ public class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         Button btn = rowView.findViewById(R.id.calculated_balance_pay);
 
         DataBase db = new DataBase(sp.getString("groupBalance",null));
-        User curUser = db.getUser(sp.getString("ID",null));
+        final User curUser = db.getUser(sp.getString("ID",null));
         final Transaction transaction = itemsArrayList.get(position);
         from.setText(transaction.getFrom());
         total.setText("€"+Double.toString(transaction.getAmount()));
         if(curUser.getName().equals(transaction.getFrom()))
             rowView.findViewById(R.id.calculated_balance_pay).setVisibility(View.VISIBLE);
 
-        final Double amount = ((transaction.getAmount() - transaction.getAmount() % 1) * 100) + transaction.getAmount() % 1 * 10;
+        final Double amount = ((transaction.getAmount() - transaction.getAmount() % 1) * 100) + transaction.getAmount() % 1 * 100;
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Tikkie tikkie = new Tikkie(context);
-                JSONObject response = tikkie.get_payment_request("2099e755-ab32-4e80-b6fc-b870155b12de",
-                        "2e01490c-972b-4b21-9233-cc87b91ba044",
-                        1234,
-                        "Dinner");
+                JSONObject response = tikkie.get_payment_request(
+                        curUser.getTikkie_user_token(),
+                        curUser.getTikkie_iban_token(),
+                        amount.intValue(),
+                        "Payment from togather");
                 String link = null;
                 try {
                     link = response.getString("paymentRequestUrl");
