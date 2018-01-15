@@ -206,13 +206,21 @@ public class TabbedActivity extends AppCompatActivity implements EventTab.OnFrag
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 0) {
-                return EventTab.newInstance();
+                return instanceOf(new EventTab());
             } else if (position == 1){
-                return GroupTab.newInstance();
+                return instanceOf(new GroupTab());
             } else if (position == 2){
-                return ProfileTab.newInstance();
+                return instanceOf(new ProfileTab());
             }
             return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        private Fragment instanceOf(Fragment fragment) {
+            Bundle args = new Bundle();
+            args.putString("param1", null);
+            args.putString("param2", null);
+            fragment.setArguments(args);
+            return fragment;
         }
 
         @Override

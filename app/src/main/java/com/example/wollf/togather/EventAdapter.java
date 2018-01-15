@@ -3,6 +3,7 @@ package com.example.wollf.togather;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,7 +46,7 @@ class EventAdapter extends ArrayAdapter<Event> {
 
         title.setText(itemsArrayList.get(position).getTitle());
         desc.setText(itemsArrayList.get(position).getDescription());
-
+        Log.i("startDate", position + " " + itemsArrayList.get(position).getStartDate().toString());
         String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
         String endDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getEndDate());
 

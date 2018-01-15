@@ -63,12 +63,6 @@ public class UserProfile extends Fragment {
         return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
