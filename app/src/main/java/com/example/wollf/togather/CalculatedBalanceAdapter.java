@@ -24,6 +24,10 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
     private final Context context;
     private final List<Transaction> itemsArrayList;
     private final SharedPreferences sp;
+    private View rowView;
+    private TextView from;
+    private TextView total;
+    private Button btn;
 
     public CalculatedBalanceAdapter(Context context, List<Transaction> itemsArrayList) {
 
@@ -36,14 +40,9 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final Context context = parent.getContext();
-
-        View rowView = inflater.inflate(R.layout.calculated_balance_row, parent, false);
-        TextView from = rowView.findViewById(R.id.calculated_balance_from);
-        TextView total = rowView.findViewById(R.id.calculated_balance_total);
-        Button btn = rowView.findViewById(R.id.calculated_balance_pay);
+        setVars(inflater, parent);
 
         DataBase db = new DataBase(sp.getString("groupBalance",null));
         final User curUser = DataBase.getUser(sp.getString("ID",null));
@@ -52,9 +51,13 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
         total.setText("€"+Double.toString(transaction.getAmount()));
         if(curUser.getName().equals(transaction.getFrom()))
             rowView.findViewById(R.id.calculated_balance_pay).setVisibility(View.VISIBLE);
-
         final Double amount = ((transaction.getAmount() - transaction.getAmount() % 1) * 100) + transaction.getAmount() % 1 * 100;
+        setOnClickListener(curUser, amount, transaction);
 
+        return rowView;
+    }
+
+    private void setOnClickListener(final User curUser, final Double amount, final Transaction transaction){
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,8 +84,13 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
                 context.startActivity(sendIntent);
             }
         });
+    }
 
-        return rowView;
+    private void setVars(LayoutInflater inflater, ViewGroup parent){
+        rowView = inflater.inflate(R.layout.calculated_balance_row, parent, false);
+        from = rowView.findViewById(R.id.calculated_balance_from);
+        total = rowView.findViewById(R.id.calculated_balance_total);
+        btn = rowView.findViewById(R.id.calculated_balance_pay);
     }
 
     private static boolean isAppInstalled(Context context) {
