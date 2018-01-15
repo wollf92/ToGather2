@@ -155,6 +155,7 @@ public class DataBase {
     }
     public void addUser(User u){
         DUMMYDATA.add(u);
+        DUMMYDATAMAP = toMap(DUMMYDATA);
     }
     public void addEvent(Event e) {
         Events.add(e);
