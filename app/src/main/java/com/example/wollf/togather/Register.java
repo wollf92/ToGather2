@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -85,13 +86,16 @@ public class Register extends AppCompatActivity {
         if (!tikkie_user.getString("response_code").equals("201")){
             Log.d("Error", "Cant create tikkie user");
         }
+        JSONArray bank_details = tikkie_user.getJSONArray("bankAccounts");
+        String iban_token = bank_details.getJSONObject(0).getString("bankAccountToken");
+        System.out.println(iban_token + " bank details");
         User new_user = new User(name.getText().toString(),
                 email.getText().toString(),
                 mPasswordView.getText().toString(),
                 iban.getText().toString(),
                 phone.getText().toString(),
                 tikkie_user.getString("userToken"),
-                tikkie_user.getJSONArray("bankAccounts").getString(0)
+                iban_token
         );
         db.addUser(new_user);
         for(User u : DataBase.getUsers()){
