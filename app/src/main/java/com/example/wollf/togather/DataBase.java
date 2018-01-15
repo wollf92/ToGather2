@@ -69,7 +69,7 @@ class DataBase {
                     "Classmates4",
                     Arrays.asList(
                             DUMMYDATA.get(0),
-                            DUMMYDATA.get(2)
+                            DUMMYDATA.get(3)
                     )
             ),
             new Group(

@@ -8,21 +8,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="user1" />
+        android:text="user1"
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="owes me" />
+        android:text="owes me"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/calculated_balance_total"
-        android:layout_width="60dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="TextView"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/calculated_balance_pay"
