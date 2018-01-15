@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.wollf.togather.EventPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Name"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+
+
+    <TextView
+        android:id="@+id/event_name_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="group_name_show"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="51dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:text="Description"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="86dp" />
+
+        <TextView
+            android:id="@+id/event_desc_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="group_desc_show"
+            android:paddingTop="10dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="121dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="Starts at"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="156dp" />
+
+        <TextView
+            android:id="@+id/event_from_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="group_from_show"
+            tools:layout_editor_absoluteX="16dp"
+            android:paddingTop="10dp"
+            tools:layout_editor_absoluteY="191dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_height="wrap_content"
+            android:text="Ends at"
+            tools:layout_editor_absoluteX="16dp"
+            android:paddingTop="10dp"
+            tools:layout_editor_absoluteY="226dp" />
+
+        <TextView
+            android:id="@+id/event_to_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="event_to_show"
+            tools:layout_editor_absoluteX="16dp"
+            android:paddingTop="10dp"
+            tools:layout_editor_absoluteY="261dp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_height="wrap_content"
+            android:text="Participants"
+            tools:layout_editor_absoluteX="16dp"
+            android:paddingTop="10dp"
+            tools:layout_editor_absoluteY="296dp" />
+
+    <TextView
+        android:id="@+id/event_group_show"
+        android:layout_width="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="event_group_show"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="335dp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -30,7 +30,7 @@ class EventAdapter extends ArrayAdapter<Event> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,7 +46,7 @@ class EventAdapter extends ArrayAdapter<Event> {
         title.setText(itemsArrayList.get(position).getTitle());
         desc.setText(itemsArrayList.get(position).getDescription());
 
-        String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
+        final String startDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getStartDate());
         String endDate = String.format("%1$te %1$tb", itemsArrayList.get(position).getEndDate());
 
         date.setText(startDate + " - " + endDate);
@@ -57,6 +57,15 @@ class EventAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View view) {
                 showPopup(view, position);
+            }
+        });
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, EventPage.class);
+                i.putExtra("EVENT_ID", itemsArrayList.get(position).getUniqueID());
+                context.startActivity(i);
             }
         });
 
