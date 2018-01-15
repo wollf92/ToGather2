@@ -76,7 +76,7 @@ class CalculatedBalanceAdapter extends ArrayAdapter<Transaction> {
     private String getLink(JSONObject response, String getString){
         String link = null;
         try {
-            link = response.getString("paymentRequestUrl");
+            link = response.getString(getString);
         } catch (JSONException e) {
             e.printStackTrace();
         }
