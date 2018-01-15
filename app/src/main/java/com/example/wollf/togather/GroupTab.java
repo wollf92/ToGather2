@@ -21,8 +21,6 @@ import static android.content.Context.MODE_PRIVATE;
  * Activities that contain this fragment must implement the
  * {@link GroupTab.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GroupTab#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class GroupTab extends Fragment {
 
@@ -39,28 +37,9 @@ public class GroupTab extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment GroupTab.
-     */
-    public static GroupTab newInstance() {
-        GroupTab fragment = new GroupTab();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, null);
-        args.putString(ARG_PARAM2, null);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         editor = this.getActivity().getSharedPreferences("user_data", MODE_PRIVATE);
     }
 
@@ -82,13 +61,6 @@ public class GroupTab extends Fragment {
 
         return rootView;
     }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
