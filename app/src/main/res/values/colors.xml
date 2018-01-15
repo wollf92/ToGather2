@@ -3,11 +3,8 @@
     <color name="colorPrimary">#29C4A6  </color>
     <color name="colorPrimaryDark">#138A72</color>
     <color name="colorAccent">#1E1E24</color>
-    <color name="lightmask">#8fffffff</color>
-    <color name="darkermask">#d5ffffff</color>
     <color name="rowback">#FFF</color>
     <color name="rowbacktint">#FFF</color>
-    <color name="darkgrey">#8D99AE</color>
     <color name="tripback">#e3e3e3</color>
 </resources>
 

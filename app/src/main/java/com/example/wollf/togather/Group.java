@@ -12,8 +12,8 @@ public class Group {
 
     String uniqueID;
     String groupName;
-    List<User> users;
-    Map<String, Double> balances;
+    private List<User> users;
+    private Map<String, Double> balances;
 
     Group(String name, List<User> users){
         this.groupName = name;
@@ -32,8 +32,7 @@ public class Group {
 
         Group group = (Group) o;
 
-        if (!groupName.equals(group.groupName)) return false;
-        return users.equals(group.users);
+        return groupName.equals(group.groupName) && users.equals(group.users);
 
     }
 

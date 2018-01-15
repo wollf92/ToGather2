@@ -2,13 +2,10 @@ package com.example.wollf.togather;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -20,7 +17,7 @@ import java.util.Locale;
  * Created by wollf on 17-12-2017.
  */
 
-public class GroupBalanceAdapter extends ArrayAdapter<User> {
+class GroupBalanceAdapter extends ArrayAdapter<User> {
     private final Context context;
     private final List<User> itemsArrayList;
     private final SharedPreferences sp;
