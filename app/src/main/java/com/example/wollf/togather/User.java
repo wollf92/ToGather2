@@ -61,7 +61,7 @@ public class User implements Serializable{
         this.name = params[0];
         this.email = params[1];
         this.password = params[2];
-        this.allergies = new String[]{"peanuts", "milk"};
+        this.allergies = name.equals("Michael de Kaste") ? new String[]{"peanuts", "milk"} : new String[0];
         this.IBAN = params[3];
         this.phone = params[4];
         this.join_date = Calendar.getInstance();

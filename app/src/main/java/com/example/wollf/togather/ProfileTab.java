@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -56,7 +58,19 @@ public class ProfileTab extends Fragment {
         t.setText(Html.fromHtml(t.getText() + " <big><b>" + u.getIBAN() + "</b></big>"));
         TextView p = rootView.findViewById(R.id.phone_field);
         p.setText(Html.fromHtml(p.getText() + " <big><b>" + u.getPhone() + "</b></big>"));
+        TextView d = rootView.findViewById(R.id.allergies_field);
+        d.setText(Html.fromHtml(d.getText() + "<big><b>" + prettyString(u.getAllergies()) + "</b></big>"));
         return rootView;
+    }
+
+    private String prettyString(String[] input){
+        String result = " ";
+        if(input.length > 0)
+            result = result + input[0];
+        if(input.length > 1)
+            for(int i = 1; i < input.length; i++)
+                result = result + ", " + input[i];
+        return result;
     }
 
     /**
