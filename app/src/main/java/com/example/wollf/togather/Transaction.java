@@ -25,4 +25,7 @@ public class Transaction {
     public double getAmount(){
         return amount;
     }
+    public void addMount(double add){
+        amount += add;
+    }
 }

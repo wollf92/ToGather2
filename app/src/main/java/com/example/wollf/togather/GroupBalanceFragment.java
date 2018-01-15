@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,15 +45,22 @@ public class GroupBalanceFragment extends Fragment {
         List<User> listOfUsers = db.getGroup(groupID).getUsers(); // Do async task as it may take long time with real DB
         GroupBalanceAdapter adapter = new GroupBalanceAdapter(getContext(), listOfUsers);
         BalanceCalculator bc = db.getCalculatorForGroup(db.getGroup(groupID));
-        for(Transaction t : bc.calculateTransaction()){
-            Log.i(t.getFrom(), ""+t.getAmount());
-        }
-        CalculatedBalanceAdapter adapter2 = new CalculatedBalanceAdapter(getContext(), bc.calculateTransaction());
+        List<Transaction> transaction = getMyTransactions(bc.calculateTransaction(), name);
+        CalculatedBalanceAdapter adapter2 = new CalculatedBalanceAdapter(getContext(), transaction);
 
         listView.setAdapter(adapter);
         listView2.setAdapter(adapter2);
         groupName.setText(db.getGroup(groupID).getGroupName());
 
         return rootView;
+    }
+
+    private List<Transaction> getMyTransactions(List<Transaction> all, String me){
+        List<Transaction> toReturn = new ArrayList<>();
+        for(Transaction t : all){
+            if(t.getTo().equals(me))
+                toReturn.add(t);
+        }
+        return toReturn;
     }
 }
